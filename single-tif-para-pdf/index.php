@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_FILES['files']['name'])) {
                 <li><a href="../index.php">Carimbo Digital</a></li>
                 <li><a href="../pdf-para-tiff/index.php">Converter PDF para TIFF</a></li>
                 <li><a href="index.php">Converter TIFF para PDF</a></li>
-                <li><a href="../chancela/index.php">Chancela Mecânica</a></li>
+                <!-- <li><a href="../chancela/index.php">Chancela Mecânica</a></li> -->
                 <li><a href="../cnm/configuracao.php">Configuração</a></li>
             </ul>
         </nav>

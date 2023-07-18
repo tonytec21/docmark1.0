@@ -17,7 +17,7 @@
                 <li><a href="index.php">Carimbo Digital</a></li>
                 <li><a href="../pdf-para-tiff/index.php">Converter PDF para TIFF</a></li>
                 <li><a href="../single-tif-para-pdf/index.php">Converter TIFF para PDF</a></li>
-                <li><a href="../chancela/index.php">Chancela Mecânica</a></li>
+                <!-- <li><a href="../chancela/index.php">Chancela Mecânica</a></li> -->
                 <li><a href="configuracao.php">Configuração</a></li>
              </ul>
         </nav>

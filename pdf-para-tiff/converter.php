@@ -1,16 +1,16 @@
 <?php
 
 function limparPastaUpload($pastaUpload) {
-    // Obtém a lista de arquivos tif na pasta
-    $arquivostif = glob($pastaUpload . '/*.tif');
+    // Obtém a lista de arquivos TIFF na pasta
+    $arquivosTIFF = glob($pastaUpload . '/*.tiff');
 
-    // Remove os arquivos tif da pasta
-    foreach ($arquivostif as $arquivotif) {
-        unlink($arquivotif);
+    // Remove os arquivos TIFF da pasta
+    foreach ($arquivosTIFF as $arquivoTIFF) {
+        unlink($arquivoTIFF);
     }
 }
 
-function converterPDFparatif($pastaPDF, $pastaUpload)
+function converterPDFparaTIFF($pastaPDF, $pastaUpload)
 {
     // Mensagens de sucesso e erro
     $mensagensSucesso = [];
@@ -18,21 +18,21 @@ function converterPDFparatif($pastaPDF, $pastaUpload)
 
     // Loop através dos arquivos PDF
     foreach ($pastaPDF as $arquivoPDF) {
-        // Gera o nome do arquivo tif de destino
-        $nomeArquivotif = basename($arquivoPDF, '.pdf') . '.tif';
-        $arquivotif = $pastaUpload . '/' . $nomeArquivotif;
+        // Gera o nome do arquivo TIFF de destino
+        $nomeArquivoTIFF = basename($arquivoPDF, '.pdf') . '.tiff';
+        $arquivoTIFF = $pastaUpload . '/' . $nomeArquivoTIFF;
 
         try {
-            // Executa o comando do ImageMagick para converter o PDF em tif em preto e branco com 200 DPI e compressão
-            $comandoImageMagick = "magick convert -density 200 -monochrome -compress Group4 {$arquivoPDF} {$arquivotif}";
+            // Executa o comando do ImageMagick para converter o PDF em TIFF em preto e branco com 200 DPI e compressão
+            $comandoImageMagick = "magick convert -density 200 -monochrome -compress Group4 {$arquivoPDF} {$arquivoTIFF}";
             exec($comandoImageMagick, $output, $returnCode);
 
             // Verifica se a conversão foi bem-sucedida
             if ($returnCode === 0) {
-                $mensagemSucesso = "Arquivo convertido com sucesso: {$arquivoPDF} -> {$arquivotif}";
+                $mensagemSucesso = "Arquivo convertido com sucesso: {$arquivoPDF} -> {$arquivoTIFF}";
                 $mensagensSucesso[] = $mensagemSucesso;
             } else {
-                $mensagemErro = "Erro ao converter o arquivo PDF em tif: {$arquivoPDF}";
+                $mensagemErro = "Erro ao converter o arquivo PDF em TIFF: {$arquivoPDF}";
                 $mensagensErro[] = $mensagemErro;
             }
         } catch (Exception $e) {
@@ -63,11 +63,11 @@ function converterPDFparatif($pastaPDF, $pastaUpload)
         ];
     }
 
-    // Adiciona os arquivos tif ao arquivo ZIP
-    $arquivostif = glob($pastaUpload . '/*.tif');
-    foreach ($arquivostif as $arquivotif) {
-        $nomeArquivo = basename($arquivotif);
-        $zip->addFile($arquivotif, $nomeArquivo);
+    // Adiciona os arquivos TIFF ao arquivo ZIP
+    $arquivosTIFF = glob($pastaUpload . '/*.tiff');
+    foreach ($arquivosTIFF as $arquivoTIFF) {
+        $nomeArquivo = basename($arquivoTIFF);
+        $zip->addFile($arquivoTIFF, $nomeArquivo);
     }
 
     // Fecha o arquivo ZIP
@@ -97,14 +97,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         move_uploaded_file($tmpName, $arquivoPDF);
     }
 
-    // Pasta para salvar as imagens tif temporariamente
+    // Pasta para salvar as imagens TIFF temporariamente
     $pastaUpload = __DIR__ . '/upload';
 
     // Limpa a pasta "upload" antes de iniciar as tarefas
     limparPastaUpload($pastaUpload);
 
-    // Chama a função para converter os arquivos PDF para tif
-    $resultado = converterPDFparatif(glob($pastaPDF . '/*.pdf'), $pastaUpload);
+    // Chama a função para converter os arquivos PDF para TIFF
+    $resultado = converterPDFparaTIFF(glob($pastaPDF . '/*.pdf'), $pastaUpload);
 
     // Faz o download do arquivo ZIP, se disponível
     if (!empty($resultado['arquivo_zip'])) {

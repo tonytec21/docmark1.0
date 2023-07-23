@@ -18,11 +18,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_FILES['files']['name'])) {
 </head>
 <body>
     <header class="header">
-        <div class="logo">
-            <br>
-            <img src="../img/logo.png" alt="Logo">
-            <h1>DocMark</h1>
+    <div class="orb-container">
+            <div class="orb"></div>
         </div>
+            <h1>DocMark</h1>
         <nav class="menu">
             <ul>
                 <li><a href="../index.php">Carimbo Digital</a></li>

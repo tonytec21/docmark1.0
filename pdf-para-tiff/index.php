@@ -34,11 +34,10 @@ usort($arquivosZIP, function ($a, $b) {
 </head>
 <body>
     <header class="header">
-        <div class="logo">
-            <br>
-            <img src="../img/logo.png" alt="Logomarca do Software">
-            <h1>DocMark</h1>
+    <div class="orb-container">
+            <div class="orb"></div>
         </div>
+            <h1>DocMark</h1>
         <nav class="menu">
             <ul>
                 <li><a href="../cnm/index.php">Carimbo Digital</a></li>

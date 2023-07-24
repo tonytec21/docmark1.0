@@ -89,11 +89,14 @@ if (file_exists('cnm.json')) {
     $timestamp = $dateTime->format('Ymd_His');
 
     // Define o nome do arquivo zip com a data e hora de geração
-    $zipFileName = 'arquivos/arquivos_' . $timestamp . '.zip';
+    $zipFileName = 'arquivos_' . $timestamp . '.zip';
+
+    // Define o caminho do arquivo zip com a pasta e o nome do arquivo
+    $zipFilePath = 'arquivos/' . $zipFileName;
 
     // Instancia a classe ZipArchive
     $zip = new ZipArchive;
-    if ($zip->open($zipFileName, ZipArchive::CREATE) === TRUE) {
+    if ($zip->open($zipFilePath, ZipArchive::CREATE) === TRUE) {
         // Adiciona cada arquivo PDF ao arquivo zip
         foreach ($pdfFiles as $pdfFile) {
             $zip->addFile('upload/' . $pdfFile, $pdfFile);
@@ -105,7 +108,7 @@ if (file_exists('cnm.json')) {
         // Força o download do arquivo zip
         header('Content-Type: application/zip');
         header('Content-Disposition: attachment; filename="' . $zipFileName . '"');
-        readfile($zipFileName);
+        readfile($zipFilePath);
 
         // Exclui todos os arquivos PDF e TIFF da pasta de upload
         foreach ($pdfFiles as $pdfFile) {

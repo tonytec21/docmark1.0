@@ -106,8 +106,8 @@ if (file_exists('cnm.json')) {
         $zip->close();
 
         // Força o download do arquivo zip
-        header('Content-Type: application/zip');
-        header('Content-Disposition: attachment; filename="' . $zipFileName . '"');
+        header("Content-Type: application/octet-stream");
+        header("Content-Disposition: attachment; filename={$zipFileName}");
         readfile($zipFilePath);
 
         // Exclui todos os arquivos PDF e TIFF da pasta de upload

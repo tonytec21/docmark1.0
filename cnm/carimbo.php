@@ -1,7 +1,7 @@
 <?php
 require_once('tcpdf/tcpdf.php');
 require_once('fpdf/fpdf.php');
-require_once 'src/autoload.php';
+require_once('src/autoload.php');
 
 use setasign\Fpdi\Fpdi;
 use setasign\Fpdi\PdfReader;
@@ -54,16 +54,28 @@ if (file_exists('cnm.json')) {
                 $pdf = addStampToPDF($pdfPath, $cnm);
 
                 // Extrai o número de matrícula do nome do arquivo
-                $numeroMatricula = explode('.', $nomeArquivo)[0];
+                $numeroMatricula = preg_replace('/\D/', '', $nomeArquivo); // Remove non-numeric characters from the file name
+                $numeroMatricula = str_pad($numeroMatricula, 8, '0', STR_PAD_LEFT); // Pad the number with zeros
 
                 // Define o nome do arquivo com o número de matrícula
-                $newFileName = str_pad($numeroMatricula, 8, '0', STR_PAD_LEFT) . '.pdf';
+                $newFileName = $numeroMatricula . '.pdf';
 
                 // Adiciona o nome do arquivo ao array de arquivos PDF
                 array_push($pdfFiles, $newFileName);
 
                 // Salva o PDF com carimbo na pasta de upload
                 $pdf->Output('F', 'upload/' . $newFileName);
+
+                // Convert PDF to TIFF using magick command
+                $tiffFileName = $numeroMatricula . '.tiff';
+                $command = 'magick convert -density 200 -monochrome -compress Group4 "upload/' . $newFileName . '" "upload/' . $tiffFileName . '"';
+                exec($command);
+
+                // Add the TIFF file to the array of PDF files
+                array_push($pdfFiles, $tiffFileName);
+
+                // Delete the temporary PDF file
+                unlink('upload/' . $newFileName);
             } else {
                 echo "Arquivo PDF não encontrado.";
             }
@@ -95,9 +107,15 @@ if (file_exists('cnm.json')) {
         header('Content-Disposition: attachment; filename="' . $zipFileName . '"');
         readfile($zipFileName);
 
-        // Exclui todos os arquivos PDF da pasta de upload
+        // Exclui todos os arquivos PDF e TIFF da pasta de upload
         foreach ($pdfFiles as $pdfFile) {
             unlink('upload/' . $pdfFile);
+        }
+
+        // Delete all PDF files in the "upload" directory
+        $pdfFilesToDelete = glob('upload/*.pdf');
+        foreach ($pdfFilesToDelete as $file) {
+            unlink($file);
         }
     } else {
         echo "Erro ao criar o arquivo zip.";

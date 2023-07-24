@@ -87,7 +87,7 @@ if (isset($_POST['submit'])) {
 
         </div>
         <br>
-        <a href="index.php" class="btn-gradient">Processar novo arquivo</a>
+        <a href="index.php" class="btn-gradient">Processar novos arquivos</a>
     </div>
     <footer>
         <p style="color: #fff;text-decoration: none"> <p><a style="color: #fff;text-decoration: none"  href="https://backupcloud.site/" target="_blank">&copy; <span id="year"></span> DocMark | By Backup Cloud. Todos os direitos reservados.</a></p></p>

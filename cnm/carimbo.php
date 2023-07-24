@@ -22,7 +22,7 @@ function addStampToPDF($pdfPath, $stampText) {
         // Define a fonte, o tamanho e a posição do carimbo
         $pdf->SetFont('Helvetica', 'B', 10);
         $pdf->SetTextColor(0, 0, 0);
-        $pdf->SetXY(145, 6);
+        $pdf->SetXY(145, 4);
 
         // Adiciona o carimbo em cada página do PDF
         $pdf->Cell(0, 0, 'CNM: ' . $stampText, 0, false, 'L');

@@ -139,7 +139,7 @@
             .container:nth-child(3n+1):hover, .container:nth-child(3n-1):hover, .container:nth-child(3n):hover {
               background: #4e3ca2;
               -webkit-transition: 0.5s;
-              scale: 0.9;
+              scale: 1;
               border-color: aliceblue;
               box-shadow: 0 0px 30px;
             }

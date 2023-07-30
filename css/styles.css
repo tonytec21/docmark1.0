@@ -129,7 +129,7 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background: #4e3ca2;
     -webkit-transition: 0.5s;
-    scale: 0.9;
+    scale: 1;
     border-color: aliceblue;
     box-shadow: 0 0px 30px;
 }
@@ -372,7 +372,7 @@ li span {
 .button:hover {
     background: #4e3ca2;
     -webkit-transition: 0.5s;
-    scale: 0.9;
+    scale: 1;
     border-color: aliceblue;
     box-shadow: 0 0px 30px;
 }
@@ -423,7 +423,7 @@ li span {
 .container .button:hover {
     background: #4e3ca2;
     -webkit-transition: 0.5s;
-    scale: 0.9;
+    scale: 1;
     border-color: aliceblue;
     box-shadow: 0 0px 30px;
 }

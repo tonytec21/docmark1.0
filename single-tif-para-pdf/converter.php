@@ -72,3 +72,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES['files']['name'])) {
         die("Erro ao fazer o download do arquivo ZIP.");
     }
 }
+?>

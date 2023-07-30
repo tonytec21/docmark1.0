@@ -1,5 +1,4 @@
 <?php
-ob_start();
 function getDataHoraArquivoZIP($arquivoZIP) {
     $nomeArquivo = basename($arquivoZIP);
     $padrao = '/arquivos_(\d{8}_\d{6})\.zip/';
@@ -10,33 +9,42 @@ function getDataHoraArquivoZIP($arquivoZIP) {
 }
 
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>DocMark - Sinal Público</title>
+    <title>DocMark - Carimbo Digital</title>
     <link rel="icon" href="../img/logo.png" type="image/png">
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../js/chart.js"></script>
     <script src="path/to/chart-config.js"></script>
     <?php include_once("../menu.php");?>
-    <script src="../js/jquery-3.6.0.min.js"></script>
-    <script src="../js/pop-up.js"></script>
 </head>
 <body>
 
-<div class="orb-container">
-    <div class="orb"></div>
-</div>
-<h1>DocMark - Sinal Público</h1>
-
+    <div class="orb-container">
+            <div class="orb"></div>
+        </div>
+            <h1>DocMark - Carimbo Digital</h1>
+        <!-- <nav class="menu">
+            <ul>
+                <li><a href="index.php">Carimbo Digital</a></li>
+                <li><a href="../pdf-para-tiff/index.php">Converter PDF para TIFF</a></li>
+                <li><a href="../single-tif-para-pdf/index.php">Converter TIFF para PDF</a></li>
+                <li><a href="index.php">Sinal Público</a></li>
+                <li><a href="configuracao.php">Configuração</a></li>
+            </ul>
+        </nav> -->
+    
     <div class="container">
-        <h3>Processar arquivos para adicionar o sinal público</h3>
-        <form action="upload.php" method="post" enctype="multipart/form-data" onsubmit="return onSubmitForm();">
-            <label for="pdf">Selecione os arquivos PDF:</label>
-            <input type="file" name="pdf[]" id="pdf" multiple><br>
-            <input type="submit" value="Processar" name="submit" class="button">
+        <h3>Processar arquivos para carimbo digital</h3>
+        <form action="processar.php" method="POST" enctype="multipart/form-data">
+            <label for="arquivoPDF">Selecione os arquivos PDF:</label>
+            <input type="file" name="arquivoPDF[]" id="arquivoPDF" multiple><br>
+            <input type="submit" name="submit" value="Processar">
         </form>
     </div>
+
 
     <div class="container" style="margin-top: -38px;margin-bottom: 2%;">
     <h3>Histórico de Processamento</h3>
@@ -126,10 +134,13 @@ function getDataHoraArquivoZIP($arquivoZIP) {
                         }
                     }
                 });
+
+
             </script>
         
     
     </ul>
+
 
     <ul>
         <?php
@@ -175,7 +186,7 @@ function getDataHoraArquivoZIP($arquivoZIP) {
                 ?>
                 <li>
                     <span>Conversão realizada em <?= $dataHoraFormatada ?></span>
-                    <a href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/chancela/arquivos/' . basename($arquivoZIP) ?>" class="btn-gradient" style="padding:5px 25px!important;">Download</a>
+                    <a href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/carimbo-digital/arquivos/' . basename($arquivoZIP) ?>" class="btn-gradient" style="padding:5px 25px!important;">Download</a>
                 </li>
             <?php endforeach; ?>
         <?php endif; ?>

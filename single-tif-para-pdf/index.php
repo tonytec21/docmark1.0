@@ -1,7 +1,8 @@
 <?php
+ob_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_FILES['files']['name'])) {
-    if (count($_FILES['files']['name']) > 2000) {
-        echo "Erro: Não é permitido selecionar mais de 2000 arquivos por vez.";
+    if (count($_FILES['files']['name']) > 100) {
+        echo "Erro: Não é permitido selecionar mais de 100 arquivos por vez.";
         exit;
     }
 
@@ -11,32 +12,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_FILES['files']['name'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>DocMark</title>
+    <title>DocMark - TIFF para PDF</title>
     <link rel="icon" href="../img/logo.png" type="image/png">
-    <link rel="stylesheet" href="../styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/chart.js"></script>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/pop-up.js"></script>
 </head>
 <body>
-    <header class="header">
+<?php include_once("../menu.php");?>
     <div class="orb-container">
             <div class="orb"></div>
         </div>
-            <h1>DocMark</h1>
-        <nav class="menu">
-            <ul>
-                <li><a href="../index.php">Carimbo Digital</a></li>
-                <li><a href="../pdf-para-tiff/index.php">Converter PDF para TIFF</a></li>
-                <li><a href="index.php">Converter TIFF para PDF</a></li>
-                <!-- <li><a href="../chancela/index.php">Chancela Mecânica</a></li> -->
-                <li><a href="../cnm/configuracao.php">Configuração</a></li>
-            </ul>
-        </nav>
-    </header>
+            <h1>DocMark - TIFF para PDF</h1>
+    
 
     <div class="container">
-        <h1>Converter arquivos TIFF para PDF</h1>
+        <h3>Converter arquivos TIFF para PDF</h3>
 
-        <form action="index.php" method="POST" enctype="multipart/form-data">
+        <form action="index.php" method="POST" enctype="multipart/form-data" onsubmit="return onSubmitForm();">
             <label for="files">Selecione os arquivos TIFF:</label>
             <input type="file" name="files[]" id="files" multiple required><br>
             <input type="submit" value="Converter">
@@ -99,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_FILES['files']['name'])) {
     </div>
 
     <div class="container" style="margin-top: -38px;margin-bottom: 2%;">
-    <h1>Histórico de Conversões</h1>
+    <h3>Histórico de Conversões</h3>
 
     <?php  
     $arquivos_dir = __DIR__.'/arquivos/';
@@ -172,8 +166,8 @@ echo '</script>';
             datasets: [{
                 label: 'Conversões por dia',
                 data: counts,
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgb(255 255 255 / 50%)',
+                borderColor: 'rgb(255 255 255 / 50%)',
                 borderWidth: 1
             }]
         },
@@ -192,15 +186,12 @@ echo '</script>';
 </script>
 
 
-</div>
-
-    <div class="container" style="margin-top: -38px;margin-bottom: 0%;">
     
     <?php  
     $arquivos_dir = __DIR__.'/arquivos/';
     $arquivos = glob($arquivos_dir . '*.zip');
     if (empty($arquivos)) {
-        echo '<p>Nenhuma conversão encontrada no histórico.</p>';
+        echo '<p style="color: #fff">Nenhuma conversão encontrada no histórico.</p>';
     } else {
         // Ordena os arquivos por data de modificação
         usort($arquivos, function($a, $b) {
@@ -241,14 +232,7 @@ echo '</script>';
 
 </div>
 
+<?php include_once("../rodape.php");?>
 
-
-    <footer>
-        <p style="color: #fff;text-decoration: none"> <p><a style="color: #fff;text-decoration: none"  href="https://backupcloud.site/" target="_blank">&copy; <span id="year"></span> DocMark | By Backup Cloud. Todos os direitos reservados.</a></p></p>
-    </footer>
-
-    <script>
-        document.getElementById("year").textContent = new Date().getFullYear();
-    </script>
 </body>
 </html>

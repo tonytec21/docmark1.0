@@ -93,17 +93,25 @@ if (isset($_FILES['pdf'])) {
         }
 
         $zip->close();
-        echo "Arquivos chancelados e compactados com sucesso!";
 
-        // Set headers and output the zip file for download
-        header('Content-Type: application/zip');
-        header('Content-Disposition: attachment; filename="' . basename($zip_path) . '"');
-        header('Content-Length: ' . filesize($zip_path));
-
-        ob_clean();
-        flush();
-        readfile($zip_path);
+        // Enviar um sinal ao JavaScript informando que o processamento foi concluído
+        echo '<script>onProcessingComplete();</script>';
+        
+        // Após o processamento, redirecionar para o arquivo ZIP para download
+        header('Location: ' . $zip_path);
         exit();
+
+        
+        // // Set headers and output the zip file for download
+        // header('Content-Type: application/zip');
+        // header('Content-Disposition: attachment; filename="' . basename($zip_path) . '"');
+        // header('Content-Length: ' . filesize($zip_path));
+
+
+        // ob_clean();
+        // flush();
+        // readfile($zip_path);
+        // exit();
 
     } else {
         echo 'Falha ao compactar o arquivo.';
@@ -112,4 +120,5 @@ if (isset($_FILES['pdf'])) {
 } else {
     echo "Nenhum arquivo enviado.";
 }
+
 ?>

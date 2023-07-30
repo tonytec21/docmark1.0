@@ -70,6 +70,9 @@ function converterPDFparaTIFF($pastaPDF, $pastaUpload)
 
     $zip->close();
 
+            // Enviar um sinal ao JavaScript informando que o processamento foi concluído
+            echo '<script>onProcessingComplete();</script>';
+
     return [
         'sucesso' => $mensagensSucesso,
         'erro' => $mensagensErro,

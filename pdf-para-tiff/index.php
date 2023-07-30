@@ -1,4 +1,5 @@
 <?php
+ob_start();
 // Pasta onde estão armazenados os arquivos ZIP
 $pastaArquivos = __DIR__ . '/arquivos';
 $pastaPDFs = __DIR__ . '/pdfs';
@@ -28,31 +29,21 @@ usort($arquivosZIP, function ($a, $b) {
 <head>
     <title>DocMark - PDF para Multi-TIFF</title>
     <link rel="icon" href="../img/logo.png" type="image/png">
-    <link rel="stylesheet" href="../styles.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css"> -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/chart.js"></script>
+    <?php include_once("../menu.php");?>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/pop-up.js"></script>
 </head>
 <body>
-    <header class="header">
+
     <div class="orb-container">
             <div class="orb"></div>
         </div>
-            <h1>DocMark</h1>
-        <nav class="menu">
-            <ul>
-                <li><a href="../cnm/index.php">Carimbo Digital</a></li>
-                <li><a href="index.php">Converter PDF para TIFF</a></li>
-                <li><a href="../single-tif-para-pdf/index.php">Converter TIFF para PDF</a></li>
-                <!-- <li><a href="../chancela/index.php">Chancela Mecânica</a></li> -->
-                <!-- <li><a href="../contato.php">Contato</a></li>
-                <li><a href="../sobre.php">Sobre</a></li> -->
-                <li><a href="../cnm/configuracao.php">Configuração</a></li>
-            </ul>
-        </nav>
-    </header>
+            <h1>DocMark - PDF para Multi-TIFF</h1>
 
     <div class="container">
-        <h1>Converter arquivos PDF para TIFF</h1>
+        <h3>Converter arquivos PDF para TIFF</h3>
 
         <?php
         // Verifica se o formulário foi enviado
@@ -104,7 +95,7 @@ usort($arquivosZIP, function ($a, $b) {
         ?>
 
         <div class="form">
-            <form method="POST" action="" enctype="multipart/form-data">
+            <form method="POST" action="" enctype="multipart/form-data" onsubmit="return onSubmitForm();">
                 <label for="pdfs">Selecione os arquivos PDF:</label>
                 <input type="file" id="pdfs" name="pdfs[]" accept=".pdf" required multiple><br>
                 <input type="submit" value="Converter">
@@ -113,7 +104,7 @@ usort($arquivosZIP, function ($a, $b) {
     </div>
 
     <div class="container" style="margin-top: -38px;margin-bottom: 2%;">
-    <h1>Histórico de Conversões</h1>
+    <h3>Histórico de Conversões</h3>
 <ul>
 
 
@@ -172,8 +163,8 @@ usort($arquivosZIP, function ($a, $b) {
             datasets: [{
                 label: 'Conversões por dia',
                 data: <?php echo json_encode(array_values($conversoesPorDia)); ?>,
-                backgroundColor: 'rgba(0, 123, 255, 0.5)',
-                borderColor: 'rgba(0, 123, 255, 1)',
+                backgroundColor: 'rgb(255 255 255 / 50%)',
+                borderColor: 'rgb(255 255 255 / 50%)',
                 borderWidth: 1
             }]
         },
@@ -191,9 +182,7 @@ usort($arquivosZIP, function ($a, $b) {
     });
 </script>
 </ul>
-</div>
 
-    <div class="container" style="margin-top: -38px;margin-bottom: 2%;">
 
     <ul>
 
@@ -203,7 +192,7 @@ usort($arquivosZIP, function ($a, $b) {
             $conversoesPorDia = [];
 
             if (empty($arquivosZIP)) : ?>
-                <p>Nenhuma conversão encontrada no histórico.</p>
+                <p style="color: #fff">Nenhuma conversão encontrada no histórico.</p>
         <?php else : ?>
             <?php foreach ($arquivosZIP as $arquivoZIP) :
                 $dataHora = getDataHoraArquivoZIP($arquivoZIP);
@@ -247,16 +236,7 @@ usort($arquivosZIP, function ($a, $b) {
     </ul>
 </div>
 
+<?php include_once("../rodape.php");?>
 
-    <footer>
-    
-    <p style="color: #fff;text-decoration: none"> <p><a style="color: #fff;text-decoration: none"  href="https://backupcloud.site/" target="_blank">&copy; <span id="year"></span> DocMark | By Backup Cloud. Todos os direitos reservados.</a></p></p>
-    
-  </footer>
-  
-  <script>
-    // Obtém o ano atual e insere no elemento de ID "year"
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script> -->
 </body>
+</html>

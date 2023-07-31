@@ -14,5 +14,5 @@
     
       <a href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/carimbo-digital/configuracao.php'?>" title="Configurações"><div id="nav5" class="nav nav5 diamond"><div class="rotCorrect"><i class="fa fa-cogs fa-2x" aria-hidden="true"></i></div></div></a> 
       
-      <link rel="stylesheet" href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/css/menu.css'?>">
-      <script src="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/js/menu.js'?>"></script>
+      <link rel="stylesheet" href="<?= 'https://' . $_SERVER['HTTP_HOST'] . '/docmark/css/menu.css'?>">
+      <script src="<?= 'https://' . $_SERVER['HTTP_HOST'] . '/docmark/js/menu.js'?>"></script>

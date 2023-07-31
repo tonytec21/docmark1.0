@@ -1,6 +1,6 @@
-<link rel="stylesheet" href="<?= 'https://' . $_SERVER['HTTP_HOST'] . '/docmark/css/w3.css'?>">
+<link rel="stylesheet" href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/css/w3.css'?>">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="<?= 'https://' . $_SERVER['HTTP_HOST'] . '/docmark/css/edit-markup.css'?>" rel='stylesheet'>
+<link href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/css/edit-markup.css'?>" rel='stylesheet'>
     
       <a href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/index.php'?>" title="Página inicial"><div id="navMenu" class="diamond"><div id="mainRotCorrect" class="rotCorrect"><i class="fa fa-home fa-4x" aria-hidden="true"></i></div></div></a>
     
@@ -14,5 +14,5 @@
     
       <a href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/carimbo-digital/configuracao.php'?>" title="Configurações"><div id="nav5" class="nav nav5 diamond"><div class="rotCorrect"><i class="fa fa-cogs fa-2x" aria-hidden="true"></i></div></div></a> 
       
-      <link rel="stylesheet" href="<?= 'https://' . $_SERVER['HTTP_HOST'] . '/docmark/css/menu.css'?>">
-      <script src="<?= 'https://' . $_SERVER['HTTP_HOST'] . '/docmark/js/menu.js'?>"></script>
+      <link rel="stylesheet" href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/css/menu.css'?>">
+      <script src="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/js/menu.js'?>"></script>

@@ -1,0 +1,28 @@
+{
+  "empresas": [
+    {
+      "id": 1,
+      "nome": "Esperantinópolis",
+      "diretorio_index": "esperantinopolis/index.php"
+    },
+    {
+      "id": 2,
+      "nome": "Bequimão",
+      "diretorio_index": "bequimao/index.php"
+    }
+  ],
+  "usuarios": [
+    {
+      "id": 1,
+      "empresa_id": 1,
+      "usuario": "jefferson",
+      "senha": "1234"
+    },
+    {
+      "id": 2,
+      "empresa_id": 2,
+      "usuario": "tony",
+      "senha": "1234"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
-<link rel="stylesheet" href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/css/w3.css'?>">
+<link rel="stylesheet" href="<?= 'https://' . $_SERVER['HTTP_HOST'] . '/docmark/css/w3.css'?>">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/css/edit-markup.css'?>" rel='stylesheet'>
+<link href="<?= 'https://' . $_SERVER['HTTP_HOST'] . '/docmark/css/edit-markup.css'?>" rel='stylesheet'>
     
       <a href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/index.php'?>" title="Página inicial"><div id="navMenu" class="diamond"><div id="mainRotCorrect" class="rotCorrect"><i class="fa fa-home fa-4x" aria-hidden="true"></i></div></div></a>
     

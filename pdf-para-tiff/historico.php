@@ -76,10 +76,10 @@ for ($i = $minimo; $i <= $maximo; $i++) {
     <div class="container">
         <h3>Histórico de Matrículas Convertidas</h3>
         
-        <div id="sincronizar">
+        <!-- <div id="sincronizar">
         <a class="btn-gradient" href="execute_sync.php" target="_blank">Sincronizar</a>
     </div>
-<br>
+<br> -->
 
                     <table id="tabela-historico" class="display">
                     <thead>

@@ -69,7 +69,7 @@ for ($i = $minimo; $i <= $maximo; $i++) {
 
     <div class="container">
         <h3>Histórico de Matrículas Convertidas</h3>
-                    <table id="tabela-historico" class="display">
+                    <table id="tabela-historico" id="tabela-historico" class="display" style="width:100%">
                     <thead>
                         <tr>
                             <th>Matrícula Nº</th>
@@ -88,7 +88,7 @@ for ($i = $minimo; $i <= $maximo; $i++) {
                                 <td><?php echo strftime('%H:%M:%S', filemtime($arquivo)); ?></td>
                                 <td><?php echo pathinfo($arquivo, PATHINFO_EXTENSION); ?></td>
                                 <td><a class="btn-gradient" href="historico/<?php echo basename($arquivo); ?>" download>Download</a></td>
-                                <td><button class="copiarBtn" data-arquivo="nome_do_arquivo.tiff">NexCloud</button></td>
+                                <td><button class='copiarBtn' data-arquivo='{$file}'>NexCloud</button></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -104,7 +104,7 @@ for ($i = $minimo; $i <= $maximo; $i++) {
 
                 <script>
                 $(document).ready(function() {
-                    $('.copiarBtn').click(function() {
+                    $('#tabela-historico').on('click', '.copiarBtn', function() {
                         var arquivo = $(this).data('arquivo');
                         $.post('copiar_arquivo.php', {arquivo: arquivo}, function(resposta) {
                             alert(resposta);
@@ -112,6 +112,7 @@ for ($i = $minimo; $i <= $maximo; $i++) {
                     });
                 });
                 </script>
+
     </div>
 
     <div class="container">

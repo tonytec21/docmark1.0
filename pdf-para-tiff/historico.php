@@ -100,15 +100,7 @@ for ($i = $minimo; $i <= $maximo; $i++) {
                         <?php endforeach; ?>
                     </tbody>
                 </table>
-
-                <script>
-                $(document).ready(function() {
-                    $('#tabela-historico').DataTable({
-                        "order": [[ 0, "asc" ]]
-                    });
-                });
-                </script>
-
+                
                 <script>
                     $(document).ready(function() {
                         $('.delete-link').on('click', function(e) {
@@ -122,8 +114,13 @@ for ($i = $minimo; $i <= $maximo; $i++) {
                     });
                 </script>
 
-
-
+                <script>
+                $(document).ready(function() {
+                    $('#tabela-historico').DataTable({
+                        "order": [[ 0, "asc" ]]
+                    });
+                });
+                </script>
 
     </div>
 

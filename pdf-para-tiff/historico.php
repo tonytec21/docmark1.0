@@ -71,10 +71,19 @@ for ($i = $minimo; $i <= $maximo; $i++) {
     <div class="container">
         <h3>Histórico de Matrículas Convertidas</h3>
         
-        <!-- <div id="sincronizar">
-        <a class="btn-gradient" href="execute_sync.php" target="_blank">Sincronizar</a>
-    </div>
-<br> -->
+        <div id="sincronizar">
+                <button class="btn-gradient" id="sincronizar-button">Sincronizar</button>
+        </div>
+
+            <script>
+            document.getElementById('sincronizar-button').addEventListener('click', function () {
+                fetch('execute_sync.php')  // Substitua pelo caminho do seu script PHP
+                    .then(response => response.text())
+                    .then(output => console.log(output));
+            });
+            </script>
+
+<br>
 
                     <table id="tabela-historico" class="display">
                     <thead>

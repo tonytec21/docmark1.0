@@ -6,6 +6,29 @@ setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 
 ?>
 
+<?php
+
+// Obtém os números dos nomes dos arquivos
+$numerosArquivos = array();
+foreach ($arquivos as $arquivo) {
+    $numeroArquivo = (int) str_replace('.tiff', '', basename($arquivo));
+    $numerosArquivos[] = $numeroArquivo;
+}
+
+// Obtém o intervalo de números
+$minimo = 1; // agora o mínimo é sempre 1
+$maximo = max($numerosArquivos);
+
+// Obtém os números faltantes
+$numerosFaltantes = array();
+for ($i = $minimo; $i <= $maximo; $i++) {
+    if (!in_array($i, $numerosArquivos)) {
+        $numerosFaltantes[] = str_pad($i, 8, '0', STR_PAD_LEFT);
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,6 +52,7 @@ setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
             <h1>DocMark - Controle de Conversões</h1>
 
     <div class="container">
+        <h3>Histórico de Matrículas Convertidas</h3>
                     <table id="tabela-historico" class="display">
                     <thead>
                         <tr>
@@ -60,6 +84,42 @@ setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
                 });
                 </script>
     </div>
+
+    <div class="container">
+        <h3 style="margin: 0px 0;">Matrículas Faltantes</h3>
+            <h3 style="margin: 0px 0;">Intervalo verificado: <?php echo $minimo . ' - ' . $maximo; ?></h3>
+
+            <table id="tabela-historico2" class="display">
+            <thead>
+                <tr>
+                    <th>Matrícula Nº</th>
+                    <th>Data da última conversão</th>
+                    <th>Horário</th>
+                    <th>Tipo de Arquivo</th>
+                    <th>Download</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($numerosFaltantes as $numeroFaltante): ?>
+                    <tr>
+                        <td><?php echo $numeroFaltante; ?></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
+        <script>
+        $(document).ready(function() {
+            $('#tabela-historico2').DataTable({
+                "order": [[ 0, "asc" ]]
+            });
+        });
+        </script>
+</div>
 
 <?php include_once("../rodape.php");?>
 

@@ -1,4 +1,4 @@
 <?php
-    $output = shell_exec('sincronizar.bat');
-    echo "<pre>$output</pre>";
+shell_exec('C:\\wamp64\\www\\docmark\\pdf-para-tiff\\sincronizar.bat');
+
 ?>

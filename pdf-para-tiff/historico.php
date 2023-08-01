@@ -75,20 +75,16 @@ for ($i = $minimo; $i <= $maximo; $i++) {
                 <button class="btn-gradient" id="sincronizar-button">Sincronizar</button>
         </div>
 
-            <script>
+                <script>
                 document.getElementById('sincronizar-button').addEventListener('click', function () {
-                    fetch('execute_sync.php')  // Substitua pelo caminho do seu script PHP
+                    fetch('execute_sync.php')
                         .then(response => response.text())
                         .then(output => {
-                            console.log(output);
-                            if (output.trim() === 'OK') {  // Substitua 'OK' pela mensagem esperada do seu script .bat
-                                alert('O script foi executado com sucesso!');
-                            } else {
-                                alert('Ocorreu um erro ao executar o script. Por favor, tente novamente.');
-                            }
+                            alert('O script foi executado com sucesso! ' + output + ' arquivos foram copiados.');
                         });
                 });
                 </script>
+
 
 
 <br>

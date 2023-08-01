@@ -80,7 +80,7 @@ for ($i = $minimo; $i <= $maximo; $i++) {
             fetch('execute_sync.php')
                 .then(response => response.text())
                 .then(output => {
-                    alert('O script foi executado com sucesso! ' + output + ' arquivos foram copiados.');
+                    alert('Comando executado com sucesso! ' + output + ' matrículas foram copiadas.');
                 });
         });
         </script>

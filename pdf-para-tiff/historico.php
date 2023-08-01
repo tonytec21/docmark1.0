@@ -77,6 +77,7 @@ for ($i = $minimo; $i <= $maximo; $i++) {
                             <th>Horário</th>
                             <th>Tipo de Arquivo</th>
                             <th>Download</th>
+                            <th>NexCloud</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -87,6 +88,7 @@ for ($i = $minimo; $i <= $maximo; $i++) {
                                 <td><?php echo strftime('%H:%M:%S', filemtime($arquivo)); ?></td>
                                 <td><?php echo pathinfo($arquivo, PATHINFO_EXTENSION); ?></td>
                                 <td><a class="btn-gradient" href="historico/<?php echo basename($arquivo); ?>" download>Download</a></td>
+                                <td><button class="copiarBtn" data-arquivo="nome_do_arquivo.tiff">NexCloud</button></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -96,6 +98,17 @@ for ($i = $minimo; $i <= $maximo; $i++) {
                 $(document).ready(function() {
                     $('#tabela-historico').DataTable({
                         "order": [[ 0, "asc" ]]
+                    });
+                });
+                </script>
+
+                <script>
+                $(document).ready(function() {
+                    $('.copiarBtn').click(function() {
+                        var arquivo = $(this).data('arquivo');
+                        $.post('copiar_arquivo.php', {arquivo: arquivo}, function(resposta) {
+                            alert(resposta);
+                        });
                     });
                 });
                 </script>

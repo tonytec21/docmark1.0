@@ -13,10 +13,23 @@ function normalizarNomeArquivo($nomeArquivo) {
     return $normalizado;
 }
 
+function copiarParaHistorico($arquivoTIFF, $pastaHistorico) {
+    $nomeArquivo = basename($arquivoTIFF);
+    $destino = $pastaHistorico . '/' . $nomeArquivo;
+    if (!copy($arquivoTIFF, $destino)) {
+        throw new Exception("Falha ao copiar {$arquivoTIFF} para {$pastaHistorico}");
+    }
+}
+
 function converterPDFparaTIFF($pastaPDF, $pastaUpload)
 {
     $mensagensSucesso = [];
     $mensagensErro = [];
+    $pastaHistorico = __DIR__ . '/historico';
+
+    if (!is_dir($pastaHistorico)) {
+        mkdir($pastaHistorico, 0777, true);
+    }
 
     foreach ($pastaPDF as $arquivoPDF) {
         preg_match_all('!\d+!', basename($arquivoPDF, '.pdf'), $matches);
@@ -30,6 +43,7 @@ function converterPDFparaTIFF($pastaPDF, $pastaUpload)
             exec($comandoImageMagick, $output, $returnCode);
 
             if ($returnCode === 0) {
+                copiarParaHistorico($arquivoTIFF, $pastaHistorico);
                 $mensagemSucesso = "Arquivo convertido com sucesso: {$arquivoPDF} -> {$arquivoTIFF}";
                 $mensagensSucesso[] = $mensagemSucesso;
             } else {
@@ -37,7 +51,7 @@ function converterPDFparaTIFF($pastaPDF, $pastaUpload)
                 $mensagensErro[] = $mensagemErro;
             }
         } catch (Exception $e) {
-            $mensagemErro = "Erro ao converter arquivo: {$arquivoPDF}";
+            $mensagemErro = "Erro ao converter arquivo: {$arquivoPDF}. Detalhes: " . $e->getMessage();
             $mensagensErro[] = $mensagemErro;
         }
     }
@@ -70,8 +84,8 @@ function converterPDFparaTIFF($pastaPDF, $pastaUpload)
 
     $zip->close();
 
-            // Enviar um sinal ao JavaScript informando que o processamento foi concluído
-            echo '<script>onProcessingComplete();</script>';
+    // Enviar um sinal ao JavaScript informando que o processamento foi concluído
+    echo '<script>onProcessingComplete();</script>';
 
     return [
         'sucesso' => $mensagensSucesso,
@@ -128,3 +142,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 ?>
+

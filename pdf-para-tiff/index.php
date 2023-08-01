@@ -27,7 +27,7 @@ usort($arquivosZIP, function ($a, $b) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>DocMark - PDF para Multi-TIFF</title>
+    <title>DocMark - PDF para TIFF</title>
     <link rel="icon" href="../img/logo.png" type="image/png">
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../js/chart.js"></script>
@@ -40,7 +40,7 @@ usort($arquivosZIP, function ($a, $b) {
     <div class="orb-container">
             <div class="orb"></div>
         </div>
-            <h1>DocMark - PDF para Multi-TIFF</h1>
+            <h1>DocMark - PDF para TIFF</h1>
 
     <div class="container">
         <h3>Converter arquivos PDF para TIFF</h3>

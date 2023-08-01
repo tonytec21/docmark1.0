@@ -32,6 +32,15 @@ function addStampToPDF($pdfPath, $stampText) {
     return $pdf;
 }
 
+// Função para copiar arquivo TIFF para diretório histórico
+function copyToHistory($tiffFileName) {
+    $source = 'upload/' . $tiffFileName;
+    $destination = '../pdf-para-tiff/historico/' . $tiffFileName;
+    if (!copy($source, $destination)) {
+        echo "Erro ao copiar $tiffFileName para o diretório histórico.";
+    }
+}
+
 // Verifica se o arquivo "cnm.json" existe
 if (file_exists('cnm.json')) {
     // Lê o conteúdo do arquivo "cnm.json"
@@ -70,6 +79,9 @@ if (file_exists('cnm.json')) {
                 $tiffFileName = $numeroMatricula . '.tiff';
                 $command = 'magick convert -density 200 -monochrome -compress Group4 "upload/' . $newFileName . '" "upload/' . $tiffFileName . '"';
                 exec($command);
+
+                // Copy TIFF file to history directory
+                copyToHistory($tiffFileName);
 
                 // Add the TIFF file to the array of PDF files
                 array_push($pdfFiles, $tiffFileName);

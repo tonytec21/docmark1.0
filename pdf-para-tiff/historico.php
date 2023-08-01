@@ -95,7 +95,7 @@ for ($i = $minimo; $i <= $maximo; $i++) {
                                 <td><?php echo strftime('%H:%M:%S', filemtime($arquivo)); ?></td>
                                 <td><?php echo pathinfo($arquivo, PATHINFO_EXTENSION); ?></td>
                                 <td><a class="btn-gradient" href="historico/<?php echo basename($arquivo); ?>" download>Download</a></td>
-                                <td><a class="btn2-gradient delete-link" style="background: rgb(255 99 132 / 53%)" href="delete.php?file=<?php echo urlencode(basename($arquivo)); ?>"><i class="fa fa-trash-o fa-1x" style="color: #fff" aria-hidden="true"></i></a></td>
+                                <td><a class="btn2-gradient delete-link" href="delete.php?file=<?php echo urlencode(basename($arquivo)); ?>"><i class="fa fa-trash-o fa-1x" style="color: #fff" aria-hidden="true"></i></a></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

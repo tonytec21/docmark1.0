@@ -29,6 +29,13 @@ for ($i = $minimo; $i <= $maximo; $i++) {
     }
 }
 
+function copiarParaRede($caminhoArquivo) {
+    $caminhoBat = 'bat.bat';
+    $comando = escapeshellcmd($caminhoBat . ' ' . $caminhoArquivo);
+    $resultado = shell_exec($comando);
+    return $resultado;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -45,16 +52,9 @@ for ($i = $minimo; $i <= $maximo; $i++) {
     <script src="js/jquery.min.js"></script>
     <script src="js/chart.js"></script>
     <script src="js/chartjs-plugin-datalabels.js"></script>
-<!-- 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="menu.js"></script> -->
-
     <script type="text/javascript" charset="utf8" src="js/jquery-3.5.1.js"></script>
     <script type="text/javascript" charset="utf8" src="js/jquery.dataTables.js"></script>
-
-
-
-
+    
     <style>
         #chart-container {
             width: 400px;
@@ -81,7 +81,7 @@ for ($i = $minimo; $i <= $maximo; $i++) {
                             <th>Horário</th>
                             <th>Tipo de Arquivo</th>
                             <th>Download</th>
-                            <!-- <th>NexCloud</th> -->
+                            <th>NexCloud</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -92,7 +92,7 @@ for ($i = $minimo; $i <= $maximo; $i++) {
                                 <td><?php echo strftime('%H:%M:%S', filemtime($arquivo)); ?></td>
                                 <td><?php echo pathinfo($arquivo, PATHINFO_EXTENSION); ?></td>
                                 <td><a class="btn-gradient" href="historico/<?php echo basename($arquivo); ?>" download>Download</a></td>
-                                <!-- <td><button class="btn-gradient" onclick="copiarParaRede('<?php echo basename($arquivo); ?>')">NexCloud</button></td> -->
+                                <td><button class="btn-gradient" onclick="copiarParaRede('<?php echo $arquivo; ?>')">NexCloud</button></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -105,14 +105,15 @@ for ($i = $minimo; $i <= $maximo; $i++) {
                     });
                 });
                 </script>
-                
-                <!-- <script>
-                    function copiarParaRede(arquivo) {
-                        $.post('copiar_para_rede.php', { arquivo: arquivo }, function(data) {
-                            alert(data.message);
-                        }, 'json');
-                    }
-                </script> -->
+
+                <script>
+                function copiarParaRede(caminhoArquivo) {
+                    $.post('copiar_para_rede.php', {caminhoArquivo: caminhoArquivo}, function(data) {
+                        alert('Arquivo copiado para a rede!');
+                    });
+                }
+                </script>
+
 
     </div>
 

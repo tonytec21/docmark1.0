@@ -39,10 +39,24 @@ for ($i = $minimo; $i <= $maximo; $i++) {
     <?php include_once("../menu.php");?>
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/pop-up.js"></script>
-
     <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/chart.js"></script>
+    <script src="js/chartjs-plugin-datalabels.js"></script>
+
+
     <script type="text/javascript" charset="utf8" src="js/jquery-3.5.1.js"></script>
     <script type="text/javascript" charset="utf8" src="js/jquery.dataTables.js"></script>
+
+
+    <style>
+        #chart-container {
+            width: 400px;
+            height: 400px;
+        }
+    </style>
+
+</head>
 </head>
 <body>
 
@@ -119,6 +133,55 @@ for ($i = $minimo; $i <= $maximo; $i++) {
             });
         });
         </script>
+</div>
+
+<div class="container">
+        <h3 style="margin: 0px 0;">Relatório de Conversão</h3>
+
+        <div id="chart-container">
+            <canvas id="grafico"></canvas>
+        </div>
+
+        <script>
+    $(document).ready(function(){
+        $.ajax({
+            url: 'data.php',
+            method: 'GET',
+            dataType: 'json',
+            success: function(data){
+                var ctx = document.getElementById('grafico').getContext('2d');
+                var chart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Matriculas Convertidas', 'Matrículas Faltantes'],
+                        datasets: [{
+                            data: [data.convertidos, data.faltantes],
+                            backgroundColor: ['rgb(75 192 192 / 69%)', 'rgb(255 99 132 / 53%)'],
+                            borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            datalabels: {
+                                color: '#fff',
+                                formatter: function(value, context) {
+                                    let total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    let percentage = ((value / total) * 100).toFixed(2) + '%';
+                                    return value + ' (' + percentage + ')';
+                                }
+                            },
+                            legend: {
+                                position: 'top',
+                            },
+                        }
+                    },
+                });
+            }
+        });
+    });
+    </script>
 </div>
 
 <?php include_once("../rodape.php");?>

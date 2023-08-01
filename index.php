@@ -24,16 +24,16 @@
            <i class="fa fa-image fa-2x" style="color: #fff" aria-hidden="true"></i><p style="color: #fff" class='image-caption'>Converter PDF para TIFF</p>
           </a>
 
-          <a class='container' style="text-decoration: none" href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/single-tif-para-pdf/index.php'?>">
-            <i class="fa fa-file-pdf-o fa-2x" style="color: #fff" aria-hidden="true"></i><p style="color: #fff" class='image-caption'>Converter TIFF para PDF</p>
+          <a class='container' style="text-decoration: none" href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/pdf-para-tiff/historico.php'?>">
+            <i class="fa fa-clock-o fa-2x" style="color: #fff" aria-hidden="true"></i><p style="color: #fff" class='image-caption'>Controle de Conversões</p>
           </a>
-
+          
           <a class='container' style="text-decoration: none" href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/chancela/index.php'?>">
             <i class="fa fa-pencil-square fa-2x" style="color: #fff" aria-hidden="true"></i><p style="color: #fff" class='image-caption'>Adicionar Sinal Público</p>
           </a>
 
-          <a class='container' style="text-decoration: none" href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/pdf-para-tiff/historico.php'?>">
-            <i class="fa fa-clock-o fa-2x" style="color: #fff" aria-hidden="true"></i><p style="color: #fff" class='image-caption'>Controle de Conversões</p>
+          <a class='container' style="text-decoration: none" href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/single-tif-para-pdf/index.php'?>">
+            <i class="fa fa-file-pdf-o fa-2x" style="color: #fff" aria-hidden="true"></i><p style="color: #fff" class='image-caption'>Converter TIFF para PDF</p>
           </a>
         </div>
 

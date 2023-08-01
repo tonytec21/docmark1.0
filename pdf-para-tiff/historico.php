@@ -6,6 +6,10 @@ $pastaHistorico = __DIR__ . '/historico';
 $arquivos = glob($pastaHistorico . '/*');
 setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 
+?>
+
+<?php
+
 // Obtém os números dos nomes dos arquivos
 $numerosArquivos = array();
 foreach ($arquivos as $arquivo) {
@@ -24,6 +28,7 @@ for ($i = $minimo; $i <= $maximo; $i++) {
         $numerosFaltantes[] = str_pad($i, 8, '0', STR_PAD_LEFT);
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -44,6 +49,9 @@ for ($i = $minimo; $i <= $maximo; $i++) {
     <script type="text/javascript" charset="utf8" src="js/jquery-3.5.1.js"></script>
     <script type="text/javascript" charset="utf8" src="js/jquery.dataTables.js"></script>
 
+
+
+
     <style>
         #chart-container {
             width: 400px;
@@ -51,6 +59,7 @@ for ($i = $minimo; $i <= $maximo; $i++) {
         }
     </style>
 
+</head>
 </head>
 <body>
 
@@ -60,7 +69,8 @@ for ($i = $minimo; $i <= $maximo; $i++) {
             <h1>DocMark - Controle de Conversões</h1>
 
     <div class="container">
-        <h3>Histórico de Matrículas Convertidas</h3>
+        <h3>Histórico de Matrículas Convertidas</h3><button class="btn-gradient" onclick="executaBat()">Sincronizar com o NexCloud</button>
+
                     <table id="tabela-historico" class="display">
                     <thead>
                         <tr>
@@ -69,7 +79,6 @@ for ($i = $minimo; $i <= $maximo; $i++) {
                             <th>Horário</th>
                             <th>Tipo de Arquivo</th>
                             <th>Download</th>
-                            <th>Enviar para Rede</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -80,7 +89,6 @@ for ($i = $minimo; $i <= $maximo; $i++) {
                                 <td><?php echo strftime('%H:%M:%S', filemtime($arquivo)); ?></td>
                                 <td><?php echo pathinfo($arquivo, PATHINFO_EXTENSION); ?></td>
                                 <td><a class="btn-gradient" href="historico/<?php echo basename($arquivo); ?>" download>Download</a></td>
-                                <td><button class="btn-gradient" onclick="copyToNetwork('historico/<?php echo basename($arquivo); ?>')">Enviar para Rede</button></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -92,21 +100,20 @@ for ($i = $minimo; $i <= $maximo; $i++) {
                         "order": [[ 0, "asc" ]]
                     });
                 });
-
-                function copyToNetwork(filePath) {
-                    $.ajax({
-                        url: 'copy_to_network.php',
-                        method: 'POST',
-                        data: { filePath: filePath },
-                        success: function(response) {
-                            alert(response);
-                        },
-                        error: function() {
-                            alert("Erro ao copiar o arquivo para a rede");
-                        }
-                    });
-                }
                 </script>
+
+                <script>
+                    function executaBat() {
+                        fetch('executa_bat.php').then(function(response) {
+                            return response.text();
+                        }).then(function(text) {
+                            console.log(text);
+                        }).catch(function(err) {
+                            console.log('Erro ao executar o .bat: ', err);
+                        });
+                    }
+                </script>
+
 
     </div>
 
@@ -169,30 +176,33 @@ for ($i = $minimo; $i <= $maximo; $i++) {
                             data: [data.convertidos, data.faltantes],
                             backgroundColor: ['rgb(75 192 192 / 69%)', 'rgb(255 99 132 / 53%)'],
                             borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)'],
-                            borderWidth: 2
+                            borderWidth: 1
                         }]
                     },
                     options: {
+                        responsive: true,
                         plugins: {
                             datalabels: {
-                                formatter: function(value, ctx) {
-                                    let sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
-                                    let percentage = (value*100 / sum).toFixed(2) + "%";
-                                    return percentage;
-                                },
                                 color: '#fff',
-                            }
+                                formatter: function(value, context) {
+                                    let total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    let percentage = ((value / total) * 100).toFixed(2) + '%';
+                                    return value + ' (' + percentage + ')';
+                                }
+                            },
+                            legend: {
+                                position: 'top',
+                            },
                         }
-                    }
+                    },
                 });
-            },
-            error: function(data){
-                console.log(data);
             }
         });
     });
     </script>
 </div>
+
+<?php include_once("../rodape.php");?>
 
 </body>
 </html>

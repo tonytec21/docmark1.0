@@ -125,7 +125,7 @@ for ($i = $minimo; $i <= $maximo; $i++) {
     </div>
 
     <div class="container">
-        <h3 style="margin: 0px 0;">Matrículas Faltantes</h3>
+        <h3 style="margin: 0px 0;">Matrículas Faltantes - <?php echo count($numerosFaltantes); ?></h3>
             <h3 style="margin: 0px 0;">Intervalo verificado: <?php echo $minimo . ' - ' . $maximo; ?></h3>
 
             <table id="tabela-historico2" class="display">

@@ -76,12 +76,20 @@ for ($i = $minimo; $i <= $maximo; $i++) {
         </div>
 
             <script>
-            document.getElementById('sincronizar-button').addEventListener('click', function () {
-                fetch('execute_sync.php')  // Substitua pelo caminho do seu script PHP
-                    .then(response => response.text())
-                    .then(output => console.log(output));
-            });
-            </script>
+                document.getElementById('sincronizar-button').addEventListener('click', function () {
+                    fetch('execute_sync.php')  // Substitua pelo caminho do seu script PHP
+                        .then(response => response.text())
+                        .then(output => {
+                            console.log(output);
+                            if (output.trim() === 'OK') {  // Substitua 'OK' pela mensagem esperada do seu script .bat
+                                alert('O script foi executado com sucesso!');
+                            } else {
+                                alert('Ocorreu um erro ao executar o script. Por favor, tente novamente.');
+                            }
+                        });
+                });
+                </script>
+
 
 <br>
 

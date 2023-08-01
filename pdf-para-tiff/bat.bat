@@ -1,2 +1,4 @@
 @echo off
-copy %1 \\files\MATRICULAS\100000\
+set "source=%~1"
+set "destination=\\files\MATRICULAS\100000"
+xcopy "%source%" "%destination%" /Y /I

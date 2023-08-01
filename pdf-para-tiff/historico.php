@@ -6,10 +6,6 @@ $pastaHistorico = __DIR__ . '/historico';
 $arquivos = glob($pastaHistorico . '/*');
 setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 
-?>
-
-<?php
-
 // Obtém os números dos nomes dos arquivos
 $numerosArquivos = array();
 foreach ($arquivos as $arquivo) {
@@ -28,7 +24,6 @@ for ($i = $minimo; $i <= $maximo; $i++) {
         $numerosFaltantes[] = str_pad($i, 8, '0', STR_PAD_LEFT);
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -89,6 +84,7 @@ for ($i = $minimo; $i <= $maximo; $i++) {
                             <th>Horário</th>
                             <th>Tipo de Arquivo</th>
                             <th>Download</th>
+                            <th>Excluir</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -99,6 +95,7 @@ for ($i = $minimo; $i <= $maximo; $i++) {
                                 <td><?php echo strftime('%H:%M:%S', filemtime($arquivo)); ?></td>
                                 <td><?php echo pathinfo($arquivo, PATHINFO_EXTENSION); ?></td>
                                 <td><a class="btn-gradient" href="historico/<?php echo basename($arquivo); ?>" download>Download</a></td>
+                                <td><a class="btn-gradient delete-link" href="delete.php?file=<?php echo urlencode(basename($arquivo)); ?>"><i class="fa fa-trash-o fa-1x" style="color: #fff" aria-hidden="true"></i></a></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -111,6 +108,21 @@ for ($i = $minimo; $i <= $maximo; $i++) {
                     });
                 });
                 </script>
+
+                <script>
+                    $(document).ready(function() {
+                        $('.delete-link').on('click', function(e) {
+                            e.preventDefault();
+                            let href = $(this).attr('href');
+                            let confirmBox = confirm('Tem certeza de que deseja excluir esta matrícula?');
+                            if (confirmBox) {
+                                window.location.href = href;
+                            }
+                        });
+                    });
+                </script>
+
+
 
 
     </div>

@@ -69,7 +69,10 @@ for ($i = $minimo; $i <= $maximo; $i++) {
             <h1>DocMark - Controle de Conversões</h1>
 
     <div class="container">
-        <h3>Histórico de Matrículas Convertidas</h3><button class="btn-gradient" onclick="executaBat()">Sincronizar com o NexCloud</button>
+        <h3>Histórico de Matrículas Convertidas</h3>
+        
+        <a class="btn-gradient" href="execute_sync.php" target="_blank">Sincronizar</a>
+
 
                     <table id="tabela-historico" class="display">
                     <thead>
@@ -100,18 +103,6 @@ for ($i = $minimo; $i <= $maximo; $i++) {
                         "order": [[ 0, "asc" ]]
                     });
                 });
-                </script>
-
-                <script>
-                    function executaBat() {
-                        fetch('executa_bat.php').then(function(response) {
-                            return response.text();
-                        }).then(function(text) {
-                            console.log(text);
-                        }).catch(function(err) {
-                            console.log('Erro ao executar o .bat: ', err);
-                        });
-                    }
                 </script>
 
 

@@ -69,7 +69,7 @@ for ($i = $minimo; $i <= $maximo; $i++) {
 
     <div class="container">
         <h3>Histórico de Matrículas Convertidas</h3>
-                    <table id="tabela-historico" id="tabela-historico" class="display" style="width:100%">
+                    <table id="tabela-historico" class="display">
                     <thead>
                         <tr>
                             <th>Matrícula Nº</th>
@@ -88,8 +88,7 @@ for ($i = $minimo; $i <= $maximo; $i++) {
                                 <td><?php echo strftime('%H:%M:%S', filemtime($arquivo)); ?></td>
                                 <td><?php echo pathinfo($arquivo, PATHINFO_EXTENSION); ?></td>
                                 <td><a class="btn-gradient" href="historico/<?php echo basename($arquivo); ?>" download>Download</a></td>
-                                <td><button class='copiarBtn' data-arquivo='{$file}'>NexCloud</button></td>
-                            </tr>
+                                <td><button class="btn-gradient" onclick="copiarParaRede('<?php echo basename($arquivo); ?>')">NexCloud</button></td>                            </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
@@ -101,16 +100,13 @@ for ($i = $minimo; $i <= $maximo; $i++) {
                     });
                 });
                 </script>
-
+                
                 <script>
-                $(document).ready(function() {
-                    $('#tabela-historico').on('click', '.copiarBtn', function() {
-                        var arquivo = $(this).data('arquivo');
-                        $.post('copiar_arquivo.php', {arquivo: arquivo}, function(resposta) {
-                            alert(resposta);
-                        });
-                    });
-                });
+                    function copiarParaRede(arquivo) {
+                        $.post('copiar_para_rede.php', { arquivo: arquivo }, function(data) {
+                            alert(data.message);
+                        }, 'json');
+                    }
                 </script>
 
     </div>

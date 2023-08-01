@@ -88,7 +88,7 @@ for ($i = $minimo; $i <= $maximo; $i++) {
                                 <td><?php echo strftime('%H:%M:%S', filemtime($arquivo)); ?></td>
                                 <td><?php echo pathinfo($arquivo, PATHINFO_EXTENSION); ?></td>
                                 <td><a class="btn-gradient" href="historico/<?php echo basename($arquivo); ?>" download>Download</a></td>
-                                <td><a class="btn-gradient" onclick="copiarParaRede('<?php echo basename($arquivo); ?>')">NexCloud</a></td>                            </tr>
+                                <td><button class="btn-gradient" onclick="copiarParaRede('<?php echo basename($arquivo); ?>')">NexCloud</button></td>                            </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
@@ -100,7 +100,7 @@ for ($i = $minimo; $i <= $maximo; $i++) {
                     });
                 });
                 </script>
-
+                
                 <script>
                     function copiarParaRede(arquivo) {
                         $.post('copiar_para_rede.php', { arquivo: arquivo }, function(data) {

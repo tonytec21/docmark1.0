@@ -11,7 +11,17 @@ if ($arquivo === null) {
 $pastaHistorico = __DIR__ . '/historico';
 $origem = $pastaHistorico . '/' . $arquivo;
 
-$destino = '//files/MATRICULAS/100000/' . $arquivo;
+$destino = '//files/MATRICULAS/100000/' . $arquivo; // substitua pelo caminho real da pasta de rede
+
+if (!file_exists($origem)) {
+    echo json_encode(['message' => 'O arquivo de origem não existe: ' . $origem]);
+    exit;
+}
+
+if (!is_writable(dirname($destino))) {
+    echo json_encode(['message' => 'A pasta de destino não é gravável: ' . dirname($destino)]);
+    exit;
+}
 
 if (!copy($origem, $destino)) {
     echo json_encode(['message' => 'Falha ao copiar arquivo para a rede.']);

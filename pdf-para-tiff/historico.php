@@ -75,15 +75,16 @@ for ($i = $minimo; $i <= $maximo; $i++) {
                 <button class="btn-gradient" id="sincronizar-button">Sincronizar</button>
         </div>
 
-                <script>
-                document.getElementById('sincronizar-button').addEventListener('click', function () {
-                    fetch('execute_sync.php')
-                        .then(response => response.text())
-                        .then(output => {
-                            alert('O script foi executado com sucesso! ' + output + ' arquivos foram copiados.');
-                        });
+        <script>
+        document.getElementById('sincronizar-button').addEventListener('click', function () {
+            fetch('execute_sync.php')
+                .then(response => response.text())
+                .then(output => {
+                    alert('O script foi executado com sucesso! ' + output + ' arquivos foram copiados.');
                 });
-                </script>
+        });
+        </script>
+
 
 
 

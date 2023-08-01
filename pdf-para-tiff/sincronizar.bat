@@ -6,10 +6,10 @@ set "destino=C:\MATRICULAS\100000"
 
 set /a count=0
 for %%F in (%origem%) do (
-    copy "%%F" "%destino%"
+    copy "%%F" "%destino%" >nul
     if !errorlevel! equ 0 (
         set /a count+=1
     )
 )
 
-echo %count%
+echo %count% > temp.txt

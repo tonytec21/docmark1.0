@@ -44,21 +44,6 @@ for ($i = $minimo; $i <= $maximo; $i++) {
     <script type="text/javascript" charset="utf8" src="js/jquery-3.5.1.js"></script>
     <script type="text/javascript" charset="utf8" src="js/jquery.dataTables.js"></script>
 
-
-
-
-    <style>
-        #chart-container {
-            width: 400px;
-            height: 400px;
-        }
-
-        #sincronizar {
-            width: 30px;
-            display: flex;
-        }
-     </style>
-
 </head>
 </head>
 <body>
@@ -72,7 +57,8 @@ for ($i = $minimo; $i <= $maximo; $i++) {
         <h3>Histórico de Matrículas Convertidas</h3>
         
         <div id="sincronizar">
-                <button class="btn-gradient" id="sincronizar-button">Sincronizar</button>
+                <button class="btn2 first" id="sincronizar-button">Sincronizar com NexCloud</button>
+                <button class="btn2 first" id="visualizar-button">Atualizar Visualização</button>
         </div>
 
         <script>
@@ -81,6 +67,16 @@ for ($i = $minimo; $i <= $maximo; $i++) {
                 .then(response => response.text())
                 .then(output => {
                     alert('Comando executado com sucesso! ' + output + ' matrículas foram copiadas.');
+                });
+        });
+        </script>
+
+        <script>
+        document.getElementById('visualizar-button').addEventListener('click', function () {
+            fetch('atualizar-visualizacao.php')
+                .then(response => response.text())
+                .then(output => {
+                    alert('Visualização das Matrículas atualizada com sucesso! ' + output + ' matrículas foram atualizadas.');
                 });
         });
         </script>
@@ -96,8 +92,9 @@ for ($i = $minimo; $i <= $maximo; $i++) {
                             <th>Matrícula Nº</th>
                             <th>Data da última conversão</th>
                             <th>Horário</th>
-                            <th>Tipo de Arquivo</th>
+                            <!-- <th>Tipo de Arquivo</th> -->
                             <th>Download</th>
+                            <th>Visualizar</th>
                             <th>Excluir</th>
                         </tr>
                     </thead>
@@ -107,8 +104,9 @@ for ($i = $minimo; $i <= $maximo; $i++) {
                                 <td><?php echo str_replace('.tiff', '', basename($arquivo)); ?></td>
                                 <td><?php echo strftime('%d de %B de %Y', filemtime($arquivo)); ?></td>
                                 <td><?php echo strftime('%H:%M:%S', filemtime($arquivo)); ?></td>
-                                <td><?php echo pathinfo($arquivo, PATHINFO_EXTENSION); ?></td>
-                                <td><a class="btn-gradient" href="historico/<?php echo basename($arquivo); ?>" download>Download</a></td>
+                                <!-- <td><?php echo pathinfo($arquivo, PATHINFO_EXTENSION); ?></td> -->
+                                <td><a class="btn first" style="text-align: center!important;" href="historico/<?php echo basename($arquivo); ?>" download>Download</a></td>
+                                <td><a class="btn first" href="pdf-viw/<?php echo str_replace('.tiff', '.pdf', basename($arquivo)); ?>" target="_blank">Visualizar</a></td>
                                 <td><a class="btn2-gradient delete-link" style="background: rgb(255 99 132 / 53%)" href="delete.php?file=<?php echo urlencode(basename($arquivo)); ?>"><i class="fa fa-trash-o fa-1x" style="color: #fff" aria-hidden="true"></i></a></td>
                             </tr>
                         <?php endforeach; ?>

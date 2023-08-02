@@ -1,4 +1,11 @@
 <?php
+// Inclua a função verificar_sessao_ativa()
+require_once 'funcoes.php';
+
+// Verifique se a sessão está ativa
+verificar_sessao_ativa();
+?>
+<?php
 ob_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_FILES['files']['name'])) {
     if (count($_FILES['files']['name']) > 100) {

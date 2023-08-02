@@ -1,4 +1,12 @@
 <?php
+// Inclua a função verificar_sessao_ativa()
+require_once 'funcoes.php';
+
+// Verifique se a sessão está ativa
+verificar_sessao_ativa();
+?>
+
+<?php
 function getDataHoraArquivoZIP($arquivoZIP) {
     $nomeArquivo = basename($arquivoZIP);
     $padrao = '/arquivos_(\d{8}_\d{6})\.zip/';

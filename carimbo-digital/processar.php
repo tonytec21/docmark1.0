@@ -1,3 +1,10 @@
+<?php
+// Inclua a função verificar_sessao_ativa()
+require_once 'funcoes.php';
+
+// Verifique se a sessão está ativa
+verificar_sessao_ativa();
+?>
 <!DOCTYPE html>
 <html>
 <head>

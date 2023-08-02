@@ -1,14 +1,34 @@
+<?php
+// Inclua a função verificar_sessao_ativa()
+require_once 'funcoes.php';
+
+// Verifique se a sessão está ativa
+verificar_sessao_ativa();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>DocMark</title>
     <link rel="icon" href="img/logo.png" type="image/png">
     <link rel="stylesheet" href="css/styles.css">
-</head>
+    <style>
+  #form {
+    display: flex;
+    flex-direction: row-reverse;
+}
+  </style>
+
+  </head>
 <body>
 <div class="header">
     
     <?php include_once("menu.php");?>
+    
+    <form id="form" action="logout.php" method="post">
+        <input type="submit" class="third" value="Sair">
+    </form>
+    
 
     <div class="inner-header flex">
       <div class="orb"></div>
@@ -46,7 +66,7 @@
               font-weight:300;
               letter-spacing: 2px;
               font-size:48px;
-              margin-top: 12.5%;
+              margin-top: 4%;
             }
 
             p {
@@ -125,6 +145,7 @@
             .main-content-container {
               max-width: 940px;
               margin: 0 auto;
+              margin-top: -100px;
               padding: 30px;
               background: none;
               display: flex;

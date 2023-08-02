@@ -1,4 +1,11 @@
 <?php
+// Inclua a função verificar_sessao_ativa()
+require_once 'funcoes.php';
+
+// Verifique se a sessão está ativa
+verificar_sessao_ativa();
+?>
+<?php
 ob_start();
 // Pasta onde estão armazenados os arquivos ZIP
 $pastaArquivos = __DIR__ . '/arquivos';

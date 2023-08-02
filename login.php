@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>DocMark - Login</title>
-    <link rel="icon" href="favicon.ico">
+    <link rel="icon" href="img/logo.png" type="image/png">
     <link rel="stylesheet" href="css/style-login.css">
 
 </head>

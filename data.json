@@ -2,7 +2,7 @@
   "empresas": [
     {
       "id": 1,
-      "nome": "Esperantinópolis - Ofício Único",
+      "nome": "Cartório - Ofício Único",
       "diretorio_index": "index.php"
     }
   ],
@@ -10,8 +10,8 @@
     {
       "id": 1,
       "empresa_id": 1,
-      "usuario": "jefferson",
-      "senha": "1234"
+      "usuario": "ADMIN",
+      "senha": "rr6rh3264f9"
     }
   ]
 }

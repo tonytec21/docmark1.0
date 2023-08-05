@@ -4,7 +4,7 @@
 
 body {
   font-family: Arial, sans-serif;
-  background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
+  background: linear-gradient(60deg, rgb(0, 0, 0) 0%, rgb(0, 172, 193) 100%);
   color: #fff;
   margin: 0;
   padding: 0;
@@ -14,7 +14,7 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
+  background: linear-gradient(60deg, rgb(0, 0, 0) 0%, rgb(0, 172, 193) 100%);
   color:white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   z-index: 100;

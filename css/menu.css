@@ -4,8 +4,8 @@
     width: 140px;
     height: 140px;
     z-index: 100;
-    background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
-    -webkit-background: linear-gradient(60deg, rgba(0,172,193,1) 0%, rgba(84,58,183,1) 100%);
+    background: linear-gradient(60deg, rgb(0, 0, 0) 0%, rgb(0, 172, 193) 100%);
+    -webkit-background: linear-gradient(60deg, rgba(0,172,193,1) 0%, rgb(0, 0, 0) 100%);
     background-size: 400% 400%;
     -webkit-background-size: 400% 400%;
     animation: gradient 5s infinite;
@@ -13,7 +13,7 @@
   }
 
   #navMenu:hover, .nav:hover {
-    background: #4e3ca2;
+    background: #383641;
     -webkit-transition: 0.5s;
     scale: 1;
     border-color: aliceblue;
@@ -37,7 +37,7 @@
     height: 67.5px;
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
-    background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
+    background: linear-gradient(60deg, rgb(0, 0, 0) 0%, rgb(0, 172, 193) 100%);
     margin-top: 25px;
     margin-left: 0px;
     cursor: pointer;
@@ -46,7 +46,7 @@
   }
 
   .diamond:active {
-    background: #4e3ca2;
+    background: #383641;
     box-shadow: 0px 1px 2.5px #101010;
     transition: 0.1s;
     -webkit-transition: 0.1s;
@@ -86,7 +86,7 @@
     top: 186px;
     left: 236px;
     z-index: 10;
-    background: #643fc1;
+    background: #383641;
     transition: 0.5s;
     -webkit-transition: 0.5s;
   }

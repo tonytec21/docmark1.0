@@ -162,7 +162,7 @@ verificar_sessao_ativa();
             }
 
             .container:nth-child(3n+1):hover, .container:nth-child(3n-1):hover, .container:nth-child(3n):hover {
-              background: #4e3ca2;
+              background: #383641;
               -webkit-transition: 0.5s;
               scale: 1;
               border-color: aliceblue;
@@ -170,17 +170,17 @@ verificar_sessao_ativa();
             }
 
             .container:nth-child(3n+1) {
-              background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
+              background: linear-gradient(60deg, rgb(0, 0, 0) 0%, rgb(0, 172, 193) 100%);
               -webkit-transition: 0.5s;
             }
 
             .container:nth-child(3n-1) {
-              background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
+              background: linear-gradient(60deg, rgb(0, 0, 0) 0%, rgb(0, 172, 193) 100%);
               -webkit-transition: 0.5s;
             }
 
             .container:nth-child(3n) {
-              background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
+              background: linear-gradient(60deg, rgb(0, 0, 0) 0%, rgb(0, 172, 193) 100%);
               -webkit-transition: 0.5s;
             }
 

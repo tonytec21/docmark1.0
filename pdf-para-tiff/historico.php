@@ -52,7 +52,6 @@ for ($i = $minimo; $i <= $maximo; $i++) {
     <script type="text/javascript" charset="utf8" src="js/jquery.dataTables.js"></script>
 
 </head>
-</head>
 <body>
 
     <div class="orb-container">

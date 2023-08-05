@@ -2,8 +2,8 @@
 
 setlocal enabledelayedexpansion
 
-set input_dir=C:\wamp64\www\docmark\pdf-para-tiff\historico
-set output_dir=C:\wamp64\www\docmark\pdf-para-tiff\pdf-viw
+set input_dir=C:\laragon\www\docmark\pdf-para-tiff\historico
+set output_dir=C:\laragon\www\docmark\pdf-para-tiff\pdf-viw
 
 set "imagemagick=C:\Program Files\ImageMagick-7.1.1-Q16-HDRI\magick.exe"
 

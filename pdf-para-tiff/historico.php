@@ -11,24 +11,27 @@ ini_set('display_errors', 0);
 
 $pastaHistorico = __DIR__ . '/historico';
 $arquivos = glob($pastaHistorico . '/*');
-setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 
-// Obtém os números dos nomes dos arquivos
-$numerosArquivos = array();
-foreach ($arquivos as $arquivo) {
-    $numeroArquivo = (int) str_replace('.tiff', '', basename($arquivo));
-    $numerosArquivos[] = $numeroArquivo;
-}
+if (!empty($arquivos)) { // Verifica se a pasta contém arquivos
+    setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 
-// Obtém o intervalo de números
-$minimo = 1; // agora o mínimo é sempre 1
-$maximo = max($numerosArquivos);
+    // Obtém os números dos nomes dos arquivos
+    $numerosArquivos = array();
+    foreach ($arquivos as $arquivo) {
+        $numeroArquivo = (int) str_replace('.tiff', '', basename($arquivo));
+        $numerosArquivos[] = $numeroArquivo;
+    }
 
-// Obtém os números faltantes
-$numerosFaltantes = array();
-for ($i = $minimo; $i <= $maximo; $i++) {
-    if (!in_array($i, $numerosArquivos)) {
-        $numerosFaltantes[] = str_pad($i, 8, '0', STR_PAD_LEFT);
+    // Obtém o intervalo de números
+    $minimo = 1; // agora o mínimo é sempre 1
+    $maximo = max($numerosArquivos);
+
+    // Obtém os números faltantes
+    $numerosFaltantes = array();
+    for ($i = $minimo; $i <= $maximo; $i++) {
+        if (!in_array($i, $numerosArquivos)) {
+            $numerosFaltantes[] = str_pad($i, 8, '0', STR_PAD_LEFT);
+        }
     }
 }
 ?>
@@ -47,10 +50,8 @@ for ($i = $minimo; $i <= $maximo; $i++) {
     <script src="js/jquery.min.js"></script>
     <script src="js/chart.js"></script>
     <script src="js/chartjs-plugin-datalabels.js"></script>
-
     <script type="text/javascript" charset="utf8" src="js/jquery-3.5.1.js"></script>
     <script type="text/javascript" charset="utf8" src="js/jquery.dataTables.js"></script>
-
 </head>
 <body>
 
@@ -67,24 +68,123 @@ for ($i = $minimo; $i <= $maximo; $i++) {
                 <button class="btn2 first" id="visualizar-button">Atualizar Visualização</button>
         </div>
 
-        <script>
-        document.getElementById('sincronizar-button').addEventListener('click', function () {
-            fetch('execute_sync.php')
-                .then(response => response.text())
-                .then(output => {
-                    alert('Comando executado com sucesso! ' + output + ' matrículas foram copiadas.');
-                });
-        });
-        </script>
+        <div id="popup" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background-color:rgba(0,0,0,0.5); text-align:center;">
+            <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background-color:white; padding:20px; border-radius:5px;">
+                <p>Executando a tarefa, por favor aguarde...</p>
+            </div>
+        </div>
 
         <script>
-        document.getElementById('visualizar-button').addEventListener('click', function () {
-            fetch('atualizar-visualizacao.php')
-                .then(response => response.text())
-                .then(output => {
-                    alert('Visualização das Matrículas atualizada com sucesso! ' + output + ' matrículas foram atualizadas.');
+            function showSuccessPopup(message) {
+                    const successHtml = `
+                        <div id="success-modal" style="
+                            position: fixed;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            background-color: rgba(0, 0, 0, 0.5);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            z-index: 9999;
+                        ">
+                            <div style="
+                                padding: 20px;
+                                background-color: #f1f1f1;
+                                border: 1px solid #ccc;
+                                border-radius: 4px;
+                            ">
+                                <p>${message}</p>
+                                <button id="close-success-btn" style="
+                                    display: block;
+                                    margin: 10px auto;
+                                    padding: 5px 10px;
+                                ">Fechar</button>
+                            </div>
+                        </div>
+                    `;
+                    $('body').append(successHtml);
+
+                    $('#close-success-btn').on('click', function() {
+                        hideSuccessPopup();
+                    });
+                }
+
+                function hideSuccessPopup() {
+                    $('#success-modal').remove();
+                }
+
+                document.getElementById('sincronizar-button').addEventListener('click', function () {
+                    showProcessingPopup(); // Mostrar pop-up de processamento
+                    fetch('execute_sync.php')
+                        .then(response => response.text())
+                        .then(output => {
+                            hideProcessingPopup(); // Esconder pop-up de processamento
+                            showSuccessPopup('Comando executado com sucesso! ' + output + ' matrículas foram sincronizadas.'); // Mostrar pop-up de sucesso
+                        })
+                        .catch(error => {
+                            hideProcessingPopup(); // Esconder pop-up de processamento em caso de erro
+                            // Adicionar lógica de manipulação de erro aqui, se necessário
+                        });
                 });
-        });
+
+
+            function showSuccessPopup(message) {
+                    const successHtml = `
+                        <div id="success-modal" style="
+                            position: fixed;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            background-color: rgba(0, 0, 0, 0.5);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            z-index: 9999;
+                        ">
+                            <div style="
+                                padding: 20px;
+                                background-color: #f1f1f1;
+                                border: 1px solid #ccc;
+                                border-radius: 4px;
+                            ">
+                                <p>${message}</p>
+                                <button id="close-success-btn" style="
+                                    display: block;
+                                    margin: 10px auto;
+                                    padding: 5px 10px;
+                                ">Fechar</button>
+                            </div>
+                        </div>
+                    `;
+                    $('body').append(successHtml);
+
+                    $('#close-success-btn').on('click', function() {
+                        hideSuccessPopup();
+                    });
+                }
+
+                function hideSuccessPopup() {
+                    $('#success-modal').remove();
+                }
+
+                document.getElementById('visualizar-button').addEventListener('click', function () {
+                    showProcessingPopup(); // Mostrar pop-up de processamento
+                    fetch('atualizar-visualizacao.php')
+                        .then(response => response.text())
+                        .then(output => {
+                            hideProcessingPopup(); // Esconder pop-up de processamento
+                            showSuccessPopup('Visualização das Matrículas atualizada com sucesso!'); // Mostrar pop-up de sucesso
+                        })
+                        .catch(error => {
+                            hideProcessingPopup(); // Esconder pop-up de processamento em caso de erro
+                            // Adicionar lógica de manipulação de erro aqui, se necessário
+                        });
+                });
+
+
         </script>
 
 

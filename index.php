@@ -45,7 +45,11 @@ verificar_sessao_ativa();
           </a>
 
           <a class='container' style="text-decoration: none" href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/pdf-para-tiff/historico.php'?>">
-            <i class="fa fa-clock-o fa-2x" style="color: #fff" aria-hidden="true"></i><p style="color: #fff" class='image-caption'>Controle de Conversões</p>
+            <i class="fa fa-check-square-o fa-2x" style="color: #fff" aria-hidden="true"></i><p style="color: #fff" class='image-caption'>Controle de Conversões</p>
+          </a>
+
+          <a class='container' style="text-decoration: none" href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/indicador-pessoal/index.php'?>">
+            <i class="fa fa-clock-o fa-2x" style="color: #fff" aria-hidden="true"></i><p style="color: #fff" class='image-caption'>Logs do Indicador Pessoal</p>
           </a>
           
           <a class='container' style="text-decoration: none" href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/chancela/index.php'?>">

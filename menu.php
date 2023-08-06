@@ -8,11 +8,11 @@
     
       <a href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/pdf-para-tiff/index.php'?>" title="Converter PDF para TIFF"><div id="nav2" class="nav nav2 diamond"><div class="rotCorrect"><i class="fa fa-image fa-2x" aria-hidden="true"></i></div></div></a>
     
-      <a href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/pdf-para-tiff/historico.php'?>" title="Controle de Conversões"><div id="nav3" class="nav nav3 diamond"><div class="rotCorrect"><i class="fa fa-clock-o fa-2x" aria-hidden="true"></i></div></div></a>
+      <a href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/pdf-para-tiff/historico.php'?>" title="Controle de Conversões"><div id="nav3" class="nav nav3 diamond"><div class="rotCorrect"><i class="fa fa-check-square-o fa-2x" aria-hidden="true"></i></div></div></a>
     
-      <a href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/chancela/index.php'?>" title="Adicionar Sinal Público"><div id="nav4" class="nav nav4 diamond"><div class="rotCorrect"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></div></div></a>
+      <a href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/indicador-pessoal/index.php'?>" title="Logs do Indicador Pessoal"><div id="nav4" class="nav nav4 diamond"><div class="rotCorrect"><i class="fa fa-clock-o fa-2x" aria-hidden="true"></i></div></div></a>
     
-      <a href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/carimbo-digital/configuracao.php'?>" title="Configurações"><div id="nav5" class="nav nav5 diamond"><div class="rotCorrect"><i class="fa fa-cogs fa-2x" aria-hidden="true"></i></div></div></a> 
+      <a href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/chancela/index.php'?>" title="Adicionar Sinal Público"><div id="nav5" class="nav nav5 diamond"><div class="rotCorrect"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></div></div></a> 
       
       <link rel="stylesheet" href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/css/menu.css'?>">
       <script src="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/js/menu.js'?>"></script>

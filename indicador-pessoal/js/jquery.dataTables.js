@@ -11613,7 +11613,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sEmptyTable": "Sem dados disponíveis",
+			"sEmptyTable": "Nenhum erro encontrado",
 	
 	
 			/**

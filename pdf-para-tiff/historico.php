@@ -35,6 +35,31 @@ if (!empty($arquivos)) { // Verifica se a pasta contém arquivos
     }
 }
 ?>
+<?php
+if(isset($_FILES['xml_file'])) {
+    $target_dir = "indicador-pessoal/";
+    // Apagar todos os arquivos dentro do diretório
+    $files = glob($target_dir . "*");
+    foreach($files as $file){
+        if(is_file($file))
+            unlink($file);
+    }
+
+    $target_file = $target_dir . basename($_FILES['xml_file']['name']);
+    $file_type = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+    // Verificar se o arquivo é um XML
+    if($file_type == "xml") {
+        if(move_uploaded_file($_FILES['xml_file']['tmp_name'], $target_file)) {
+            echo '<script>alert("Arquivo anexado com sucesso");</script>';
+        } else {
+            echo '<script>alert("Ocorreu um erro ao anexar o arquivo");</script>';
+        }
+    } else {
+        echo '<script>alert("Por favor, selecione um arquivo XML");</script>';
+    }
+}
+?>
 
 <!DOCTYPE html>
 <html>
@@ -52,6 +77,17 @@ if (!empty($arquivos)) { // Verifica se a pasta contém arquivos
     <script src="js/chartjs-plugin-datalabels.js"></script>
     <script type="text/javascript" charset="utf8" src="js/jquery-3.5.1.js"></script>
     <script type="text/javascript" charset="utf8" src="js/jquery.dataTables.js"></script>
+<style>
+    form {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+    #sincronizar2{
+        margin-left: 60%;
+        margin-top: -7%;
+    }
+    </style>
 </head>
 <body>
 
@@ -61,12 +97,18 @@ if (!empty($arquivos)) { // Verifica se a pasta contém arquivos
             <h1>DocMark - Controle de Conversões</h1>
 
     <div class="container">
-        <h3>Histórico de Matrículas Convertidas</h3>
-        
-        <div id="sincronizar">
+    <div id="sincronizar">
                 <button class="btn2 first" id="sincronizar-button">Sincronizar com NexCloud</button>
                 <button class="btn2 first" id="visualizar-button">Atualizar Visualização</button>
-        </div>
+        </div><br>
+        <div id="sincronizar2">
+        <form action="" method="post" enctype="multipart/form-data">
+        <div>Selecione um arquivo XML do indicador pessoal para anexar: </div>
+                    <input type="file" name="xml_file" accept=".xml">
+                    <input type="submit" value="Anexar Arquivo">
+                </form>
+</div>
+    <h3>Histórico de Matrículas Convertidas</h3>
 
         <div id="popup" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background-color:rgba(0,0,0,0.5); text-align:center;">
             <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background-color:white; padding:20px; border-radius:5px;">
@@ -121,7 +163,7 @@ if (!empty($arquivos)) { // Verifica se a pasta contém arquivos
                         .then(response => response.text())
                         .then(output => {
                             hideProcessingPopup(); // Esconder pop-up de processamento
-                            showSuccessPopup('Comando executado com sucesso! ' + output + ' matrículas foram sincronizadas.'); // Mostrar pop-up de sucesso
+                            showSuccessPopup('Comando executado com sucesso!<br> ' + output + ' matrículas foram sincronizadas e 1 arquivo XML do indicador pessoal'); // Mostrar pop-up de sucesso
                         })
                         .catch(error => {
                             hideProcessingPopup(); // Esconder pop-up de processamento em caso de erro

@@ -7,15 +7,27 @@ use setasign\Fpdi\Fpdi;
 use setasign\Fpdi\PdfReader;
 
 function deleteFiles($target) {
-    if(is_dir($target)){
-        $files = glob( $target . '*', GLOB_MARK ); 
-        foreach( $files as $file ){ 
-            if(is_dir($file)) 
-                deleteFiles( $file ); 
+    if (is_dir($target)) {
+        $files = glob($target . '*', GLOB_MARK);
+        foreach ($files as $file) {
+            if (is_dir($file))
+                deleteFiles($file);
             else
-                unlink( $file );  
+                unlink($file);
         }
     }
+}
+
+function formatarNomeArquivo($nomeOriginal) {
+    preg_match_all('/\d+/', $nomeOriginal, $matches);
+    $numeros = implode('', $matches[0]);
+
+    if (!$numeros) {
+        throw new Exception("Nome do arquivo precisa conter ao menos um número.");
+    }
+
+    $numeros = str_pad($numeros, 8, '0', STR_PAD_LEFT);
+    return $numeros . '.pdf';
 }
 
 if (isset($_FILES['pdf'])) {
@@ -33,92 +45,71 @@ if (isset($_FILES['pdf'])) {
     $zip_path = $output_dir . $zip_file;
     $zip = new ZipArchive;
 
-    // clean the upload and temp directories
     deleteFiles($upload_dir);
     deleteFiles($temp_dir);
 
     if ($zip->open($zip_path, ZipArchive::CREATE) === TRUE) {
         foreach ($file_names as $key => $file_name) {
+            $formatted_name = formatarNomeArquivo($file_name);
             $file_tmp = $file_tmps[$key];
-            $file_parts = explode('.', $file_name);
-            $file_ext = strtolower(end($file_parts));
 
-            if (in_array($file_ext, $extensions) === false) {
+            if (in_array(pathinfo($file_name, PATHINFO_EXTENSION), $extensions) === false) {
                 $errors[] = "Extension not allowed, please choose a PDF file.";
             }
 
             if (empty($errors) == true) {
-                $dest_file_path = $upload_dir . $file_name;
-                // move the file to the upload directory
+                $dest_file_path = $upload_dir . $formatted_name;
                 move_uploaded_file($file_tmp, $dest_file_path);
 
-                // Verify if the file is properly moved
                 if (!file_exists($dest_file_path)) {
                     die("Error: Failed to move the file to the upload directory.");
                 }
 
-                // create new PDF
                 $pdf = new Fpdi();
 
-                // Verify if the file can be read by FPDI
                 try {
-                    // get the page count
                     $pageCount = $pdf->setSourceFile($dest_file_path);
                 } catch (Exception $e) {
                     die("Error: Failed to read the file using FPDI. " . $e->getMessage());
                 }
 
-                // iterate through all pages
                 for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
                     $pdf->AddPage();
-                    // import a page
                     $templateId = $pdf->importPage($pageNo);
                     $pdf->useTemplate($templateId);
 
-                    // stamp the image
                     $pdf->Image($stamp_image, 190, 2, 18, 0, 'PNG');
-                    // stamp the image 2
                     $pdf->Image($stamp_image_2, 5, 200, 10, 0, 'PNG');
                 }
-                
-                // Output the new PDF
-                $output_file = $temp_dir . $file_name;
+
+                $output_file = $temp_dir . $formatted_name;
                 $pdf->Output('F', $output_file);
 
-                // add the output file into the zip
                 $zip->addFile($output_file, basename($output_file));
+
+                // Convertendo para TIFF e salvando em "historico"
+                try {
+                    $nomeArquivoTIFF = str_replace('.pdf', '.tiff', $formatted_name);
+                    $arquivoTIFF = "../pdf-para-tiff/historico/" . $nomeArquivoTIFF;
+                    $comandoImageMagick = "magick convert -density 200 -monochrome -compress Group4 {$output_file} {$arquivoTIFF}";
+                    exec($comandoImageMagick);
+                } catch (Exception $e) {
+                    die("Erro: " . $e->getMessage());
+                }
             } else {
                 print_r($errors);
             }
         }
 
         $zip->close();
-
-        // Enviar um sinal ao JavaScript informando que o processamento foi concluído
         echo '<script>onProcessingComplete();</script>';
-        
-        // Após o processamento, redirecionar para o arquivo ZIP para download
         header('Location: ' . $zip_path);
         exit();
-
-        
-        // // Set headers and output the zip file for download
-        // header('Content-Type: application/zip');
-        // header('Content-Disposition: attachment; filename="' . basename($zip_path) . '"');
-        // header('Content-Length: ' . filesize($zip_path));
-
-
-        // ob_clean();
-        // flush();
-        // readfile($zip_path);
-        // exit();
 
     } else {
         echo 'Falha ao compactar o arquivo.';
     }
-    
 } else {
     echo "Nenhum arquivo enviado.";
 }
-
 ?>

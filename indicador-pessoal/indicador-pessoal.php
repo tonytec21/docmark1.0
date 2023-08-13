@@ -98,7 +98,7 @@ function formatDateToBrazilian($dateString) {
             </option>
         <?php endforeach; ?>
     </select>
-    <input type="submit" value="Carregar arquivo" />
+    <input type="submit" value="Visualizar" />
 </form>
 
 <?php

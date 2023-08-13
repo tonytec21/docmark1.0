@@ -1,5 +1,5 @@
 @echo off
-title Atualizando o BookC
+title Atualizando o DocMark
 echo Aguarde atualizando o BookC...
 cd %SystemDrive%\laragon\www\docmark
 git pull

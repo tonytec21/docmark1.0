@@ -291,20 +291,20 @@ if(isset($_FILES['xml_file'])) {
             <thead>
                 <tr>
                     <th>Matrícula Nº</th>
-                    <th>Data da última conversão</th>
+                    <!-- <th>Data da última conversão</th>
                     <th>Horário</th>
                     <th>Tipo de Arquivo</th>
-                    <th>Download</th>
+                    <th>Download</th> -->
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($numerosFaltantes as $numeroFaltante): ?>
                     <tr>
                         <td><?php echo $numeroFaltante; ?></td>
+                        <!-- <td></td>
                         <td></td>
                         <td></td>
-                        <td></td>
-                        <td></td>
+                        <td></td> -->
                     </tr>
                 <?php endforeach; ?>
             </tbody>

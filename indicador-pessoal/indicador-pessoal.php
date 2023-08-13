@@ -80,12 +80,17 @@ function formatDateToBrazilian($dateString) {
             <h1>DocMark - Indicador Pessoal</h1><br><br><br>
             <div class="container">
             <?php
-    $files = glob("../pdf-para-tiff/historico-indicador/*.xml");
-
-    function fixEncodingWithIconv($input) {
-        // Tentamos converter de "UTF-8" para "ISO-8859-1" e depois corretamente para "UTF-8"
-        return iconv("UTF-8", "ISO-8859-1//TRANSLIT", $input);
-    }
+            function compareFileDates($a, $b) {
+                return filemtime($b) - filemtime($a);
+            }
+            
+            $files = glob("../pdf-para-tiff/historico-indicador/*.xml");
+            usort($files, 'compareFileDates');
+            
+            function fixEncodingWithIconv($input) {
+                // Tentamos converter de "UTF-8" para "ISO-8859-1" e depois corretamente para "UTF-8"
+                return iconv("UTF-8", "ISO-8859-1//TRANSLIT", $input);
+            }
 ?>
 
 <form method="post">

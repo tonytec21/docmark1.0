@@ -671,9 +671,10 @@ button:hover {
 }
 
 #sincronizar {
-    width: 80%;
-    display: flex;
-    flex-direction: row;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
 }
 
 .btn {

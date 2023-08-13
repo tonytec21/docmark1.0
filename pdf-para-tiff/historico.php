@@ -87,6 +87,7 @@ if(isset($_FILES['xml_file'])) {
         margin-left: 60%;
         margin-top: -7%;
     }
+    
     </style>
 </head>
 <body>
@@ -100,12 +101,10 @@ if(isset($_FILES['xml_file'])) {
     <div id="sincronizar">
                 <button class="btn2 first" id="sincronizar-button">Sincronizar com NexCloud</button>
                 <button class="btn2 first" id="visualizar-button">Atualizar Visualização</button>
-        </div><br>
-        <div id="sincronizar2">
-        <form action="" method="post" enctype="multipart/form-data">
-        <div>Selecione um arquivo XML do indicador pessoal para anexar: </div>
-                    <input type="file" name="xml_file" accept=".xml">
-                    <input type="submit" value="Anexar Arquivo">
+                <form action="" method="post" enctype="multipart/form-data">
+                <div>Selecione um arquivo XML do indicador pessoal para anexar: </div>
+                      <input type="file" name="xml_file" accept=".xml">
+                       <input type="submit" value="Anexar Arquivo">
                 </form>
 </div>
     <h3>Histórico de Matrículas Convertidas</h3>

@@ -38,7 +38,9 @@ if (!empty($arquivos)) { // Verifica se a pasta contém arquivos
 <?php
 if(isset($_FILES['xml_file'])) {
     $target_dir = "indicador-pessoal/";
-    // Apagar todos os arquivos dentro do diretório
+    $history_dir = "historico-indicador/";
+
+    // Apagar todos os arquivos dentro do diretório "indicador-pessoal"
     $files = glob($target_dir . "*");
     foreach($files as $file){
         if(is_file($file))
@@ -46,20 +48,29 @@ if(isset($_FILES['xml_file'])) {
     }
 
     $target_file = $target_dir . basename($_FILES['xml_file']['name']);
+    $history_file = $history_dir . basename($_FILES['xml_file']['name']); // O caminho para a cópia no diretório "historico-indicador"
     $file_type = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
     // Verificar se o arquivo é um XML
     if($file_type == "xml") {
         if(move_uploaded_file($_FILES['xml_file']['tmp_name'], $target_file)) {
             echo '<script>alert("Arquivo anexado com sucesso");</script>';
+
+            // Copiar o arquivo para "historico-indicador"
+            if(copy($target_file, $history_file)) {
+                echo '<script>alert("Arquivo disponível para visualização em indicador pessoal");</script>';
+            } else {
+                echo '<script>alert("Ocorreu um erro ao copiar o arquivo");</script>';
+            }
         } else {
-            echo '<script>alert("Ocorreu um erro ao anexar o arquivo");</script>';
+            echo '<script>alert("Ocorreu um erro ao anexar o arquivo em indicador-pessoal");</script>';
         }
     } else {
         echo '<script>alert("Por favor, selecione um arquivo XML");</script>';
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -106,6 +117,7 @@ if(isset($_FILES['xml_file'])) {
                       <input type="file" name="xml_file" accept=".xml">
                        <input type="submit" value="Anexar Arquivo">
                 </form>
+                <button style="margin-left: 10%" class="btn2 first" id="visualizar-indicador">Visualizar Indicador Pessoal</button>
 </div>
     <h3>Histórico de Matrículas Convertidas</h3>
 
@@ -224,6 +236,24 @@ if(isset($_FILES['xml_file'])) {
                             // Adicionar lógica de manipulação de erro aqui, se necessário
                         });
                 });
+
+                document.getElementById('visualizar-indicador').addEventListener('click', function () {
+                    showProcessingPopup(); // Mostrar pop-up de processamento
+                    
+                    fetch('../indicador-pessoal/indicador-pessoal.php')
+                        .then(response => response.text())
+                        .then(output => {
+                            hideProcessingPopup(); // Esconder pop-up de processamento
+                            
+                            // Abre a página em uma nova guia
+                            window.open('../indicador-pessoal/indicador-pessoal.php', '_blank');
+                        })
+                        .catch(error => {
+                            hideProcessingPopup(); // Esconder pop-up de processamento em caso de erro
+                            // Adicionar lógica de manipulação de erro aqui, se necessário
+                        });
+                });
+
 
 
         </script>

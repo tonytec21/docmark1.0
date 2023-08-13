@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_FILES['files']['name'])) {
     <div class="orb-container">
             <div class="orb"></div>
         </div>
-            <h1>DocMark - TIFF para PDF</h1>
+            <h1>DocMark - TIFF para PDF</h1><br><br><br>
     
 
     <div class="container">

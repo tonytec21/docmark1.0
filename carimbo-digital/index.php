@@ -33,7 +33,7 @@ function getDataHoraArquivoZIP($arquivoZIP) {
     <div class="orb-container">
             <div class="orb"></div>
         </div>
-            <h1>DocMark - Carimbo Digital</h1>
+            <h1>DocMark - Carimbo Digital</h1><br><br><br>
         <!-- <nav class="menu">
             <ul>
                 <li><a href="index.php">Carimbo Digital</a></li>

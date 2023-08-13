@@ -169,7 +169,7 @@ function imprimirFormulario() {
     <div class="orb-container">
             <div class="orb"></div>
     </div>
-            <h1>DocMark - Logs do Indicador Pessoal</h1>
+            <h1>DocMark - Logs do Indicador Pessoal</h1><br><br><br>
             <div class="container">
             <div id="sincronizar">
                 <button class="btn2 first" id="sincronizar-button">Sincronizar arquivos de Log</button><?php imprimirFormulario(); ?>

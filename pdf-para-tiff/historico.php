@@ -94,7 +94,7 @@ if(isset($_FILES['xml_file'])) {
     <div class="orb-container">
             <div class="orb"></div>
     </div>
-            <h1>DocMark - Controle de Conversões</h1>
+            <h1>DocMark - Controle de Conversões</h1><br><br><br>
 
     <div class="container">
     <div id="sincronizar">

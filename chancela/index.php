@@ -34,7 +34,7 @@ function getDataHoraArquivoZIP($arquivoZIP) {
 <div class="orb-container">
     <div class="orb"></div>
 </div>
-<h1>DocMark - Sinal Público</h1>
+<h1>DocMark - Sinal Público</h1><br><br><br>
 
     <div class="container">
         <h3>Processar arquivos para adicionar o sinal público</h3>

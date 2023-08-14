@@ -29,7 +29,7 @@ function formatDateToBrazilian($dateString) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>DocMark - Logs do Indicador Pessoal</title>
+    <title>DocMark - Indicador Pessoal</title>
     <link rel="icon" href="../img/logo.png" type="image/png">
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../js/chart.js"></script>

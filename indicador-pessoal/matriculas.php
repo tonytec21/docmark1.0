@@ -130,8 +130,12 @@ input[type="text"]{
     font-weight: bold;
     cursor: pointer;
 }
-
-
+#sincronizar3{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
     </style>
 </head>
 <body>
@@ -140,8 +144,9 @@ input[type="text"]{
     </div>
     <h1>DocMark - Matrículas Cadastradas</h1><br><br><br>
     <div class="container">
-    <div id="sincronizar">
+    <div id="sincronizar3">
                 <button class="btn2 first" id="modalcadastro">Cadastrar Matrícula</button>
+                <button class="btn2 first" id="visualizar-indicador">Visualizar XML do Indicador Pessoal</button>
                 <button class="btn2 first" id="modalgerarXML">Gerar Arquivo XML</button>
     </div>
         <h2>Indicador Pessoal</h2>
@@ -236,6 +241,23 @@ input[type="text"]{
                 }
             });
         });
+
+        document.getElementById('visualizar-indicador').addEventListener('click', function () {
+                    showProcessingPopup(); // Mostrar pop-up de processamento
+                    
+                    fetch('indicador-pessoal.php')
+                        .then(response => response.text())
+                        .then(output => {
+                            hideProcessingPopup(); // Esconder pop-up de processamento
+                            
+                            // Abre a página em uma nova guia
+                            window.open('indicador-pessoal.php', '_blank');
+                        })
+                        .catch(error => {
+                            hideProcessingPopup(); // Esconder pop-up de processamento em caso de erro
+                            // Adicionar lógica de manipulação de erro aqui, se necessário
+                        });
+                });
 
     </script>
 

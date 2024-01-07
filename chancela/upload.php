@@ -10,12 +10,15 @@ function copyFiles($sourceDir, $targetDir) {
     if (!is_dir($sourceDir)) {
         throw new Exception("Diretório de origem não encontrado: $sourceDir");
     }
+
     if (!is_dir($targetDir)) {
         if (!mkdir($targetDir, 0777, true)) {
             throw new Exception("Falha ao criar o diretório de destino: $targetDir");
         }
     }
+
     $files = glob($sourceDir . '*');
+
     foreach ($files as $file) {
         $targetFile = $targetDir . basename($file);
         copy($file, $targetFile);

@@ -6,6 +6,22 @@ require_once 'src/autoload.php';
 use setasign\Fpdi\Fpdi;
 use setasign\Fpdi\PdfReader;
 
+function copyFiles($sourceDir, $targetDir) {
+    if (!is_dir($sourceDir)) {
+        throw new Exception("Diretório de origem não encontrado: $sourceDir");
+    }
+    if (!is_dir($targetDir)) {
+        if (!mkdir($targetDir, 0777, true)) {
+            throw new Exception("Falha ao criar o diretório de destino: $targetDir");
+        }
+    }
+    $files = glob($sourceDir . '*');
+    foreach ($files as $file) {
+        $targetFile = $targetDir . basename($file);
+        copy($file, $targetFile);
+    }
+}
+
 function deleteFiles($target) {
     if (is_dir($target)) {
         $files = glob($target . '*', GLOB_MARK);
@@ -38,6 +54,7 @@ if (isset($_FILES['pdf'])) {
     $extensions = array("pdf");
     $upload_dir = "pdfs/";
     $temp_dir = "temp/";
+    $temp_dir2 = "../pdf-para-tiff/pdf-viw/";
     $output_dir = "arquivos/";
     $stamp_image = 'config/chancela.png';
     $stamp_image_2 = 'config/chancela-2.png';
@@ -45,6 +62,8 @@ if (isset($_FILES['pdf'])) {
     $zip_path = $output_dir . $zip_file;
     $zip = new ZipArchive;
 
+    
+    copyFiles($temp_dir, $temp_dir2);
     deleteFiles($upload_dir);
     deleteFiles($temp_dir);
 
@@ -102,10 +121,9 @@ if (isset($_FILES['pdf'])) {
         }
 
         $zip->close();
-        echo '<script>onProcessingComplete();</script>';
-        header('Location: ' . $zip_path);
-        exit();
-
+        copyFiles($temp_dir, $temp_dir2);
+        
+        echo '<script>alert("Processamento concluído! Clique em OK para ir para o histórico."); window.location.href = "../pdf-para-tiff/historico.php";</script>';
     } else {
         echo 'Falha ao compactar o arquivo.';
     }

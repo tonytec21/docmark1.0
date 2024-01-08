@@ -1,11 +1,7 @@
 <?php
-// Inclua a função verificar_sessao_ativa()
 require_once 'funcoes.php';
-
-// Verifique se a sessão está ativa
 verificar_sessao_ativa();
-?>
-<?php
+
 error_reporting(0);
 ini_set('display_errors', 0);
 
@@ -23,7 +19,7 @@ if (!empty($arquivos)) { // Verifica se a pasta contém arquivos
     }
 
     // Obtém o intervalo de números
-    $minimo = 1; // agora o mínimo é sempre 1
+    $minimo = 1;
     $maximo = max($numerosArquivos);
 
     // Obtém os números faltantes
@@ -34,8 +30,7 @@ if (!empty($arquivos)) { // Verifica se a pasta contém arquivos
         }
     }
 }
-?>
-<?php
+
 if(isset($_FILES['xml_file'])) {
     $target_dir = "indicador-pessoal/";
     $history_dir = "historico-indicador/";
@@ -79,7 +74,6 @@ if(isset($_FILES['xml_file'])) {
     <link rel="icon" href="../img/logo.png" type="image/png">
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../js/chart.js"></script>
-    <?php include_once("../menu.php");?>
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/pop-up.js"></script>
     <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
@@ -88,11 +82,13 @@ if(isset($_FILES['xml_file'])) {
     <script src="js/chartjs-plugin-datalabels.js"></script>
     <script type="text/javascript" charset="utf8" src="js/jquery-3.5.1.js"></script>
     <script type="text/javascript" charset="utf8" src="js/jquery.dataTables.js"></script>
+
 <style>
     form {
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
+        align-items: center;
     }
     #sincronizar2{
         margin-left: 60%;
@@ -106,26 +102,39 @@ if(isset($_FILES['xml_file'])) {
     <div class="orb-container">
             <div class="orb"></div>
     </div>
-            <h1>DocMark - Controle de Conversões</h1><br><br><br>
-
-    <div class="container">
-    <div id="sincronizar">
-                <button class="btn2 first" id="sincronizar-button">Sincronizar com NexCloud</button>
-                <button class="btn2 first" id="visualizar-button">Atualizar Visualização</button>
-                <form action="" method="post" enctype="multipart/form-data">
-                <div>Selecione um arquivo XML do indicador pessoal para anexar: </div>
-                      <input type="file" name="xml_file" accept=".xml">
-                       <input type="submit" value="Anexar Arquivo">
+            <h1>DocMark - Controle de Conversões</h1>
+            <?php include_once("../menu.php");?>
+            <!-- SINAL PÚBLICO E INDICADOR PESSOAL -->
+            <div class="container">
+            <div id="sincronizar">
+                <form style="border-right: 1px solid #ccc;padding-right: 30px;" action="../chancela/upload.php" method="post" enctype="multipart/form-data" onsubmit="return onSubmitForm();">
+                <h3>ADICIONAR SINAL PÚBLICO</h3>
+                <div>Selecione os arquivos PDF para adicionar o sinal público</div>    
+                    <input type="file" name="pdf[]" id="pdf" multiple>
+                    <input type="submit" value="Processar" name="submit" class="button">
                 </form>
-                <button style="margin-left: 10%" class="btn2 first" id="visualizar-indicador">Visualizar Indicador Pessoal</button>
-</div>
-    <h3>Histórico de Matrículas Convertidas</h3>
 
-        <div id="popup" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background-color:rgba(0,0,0,0.5); text-align:center;">
-            <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background-color:white; padding:20px; border-radius:5px;">
-                <p>Executando a tarefa, por favor aguarde...</p>
+                <form action="" method="post" enctype="multipart/form-data">
+                <h3>ANEXAR INDICADOR PESSOAL</h3>
+                <div>Selecione um arquivo XML do indicador pessoal para anexar: </div>
+                    <input type="file" name="xml_file" accept=".xml">
+                    <input type="submit" value="Anexar Arquivo">
+                </form>
             </div>
-        </div>
+            <br>
+
+            <div id="sincronizar" style="border-top: 1px solid #ccc;padding-top: 30px;">
+                        <button class="btn2 first" id="sincronizar-button">Sincronizar com NexCloud</button>                        
+                        <button class="btn2 first" id="visualizar-indicador">Visualizar Indicador Pessoal</button>
+            </div>
+            <br>
+            <h3>Histórico de Matrículas Convertidas</h3>
+
+                <div id="popup" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background-color:rgba(0,0,0,0.5); text-align:center;">
+                    <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background-color:white; padding:20px; border-radius:5px;">
+                        <p>Executando a tarefa, por favor aguarde...</p>
+                    </div>
+                </div>
 
         <script>
             function showSuccessPopup(message) {
@@ -178,7 +187,6 @@ if(isset($_FILES['xml_file'])) {
                         })
                         .catch(error => {
                             hideProcessingPopup(); // Esconder pop-up de processamento em caso de erro
-                            // Adicionar lógica de manipulação de erro aqui, se necessário
                         });
                 });
 
@@ -233,7 +241,6 @@ if(isset($_FILES['xml_file'])) {
                         })
                         .catch(error => {
                             hideProcessingPopup(); // Esconder pop-up de processamento em caso de erro
-                            // Adicionar lógica de manipulação de erro aqui, se necessário
                         });
                 });
 
@@ -250,27 +257,19 @@ if(isset($_FILES['xml_file'])) {
                         })
                         .catch(error => {
                             hideProcessingPopup(); // Esconder pop-up de processamento em caso de erro
-                            // Adicionar lógica de manipulação de erro aqui, se necessário
                         });
                 });
 
-
-
         </script>
 
-
-
-
-<br>
-
+        <!-- HISTÓRICO DE MATRÍCULAS CONVERTIDAS -->
                     <table id="tabela-historico" class="display">
                     <thead>
                         <tr>
                             <th>Matrícula Nº</th>
                             <th>Data da última conversão</th>
                             <th>Horário</th>
-                            <!-- <th>Tipo de Arquivo</th> -->
-                            <th>Download</th>
+                            <th>Download TIFF</th>
                             <th>Visualizar</th>
                             <th>Excluir</th>
                         </tr>
@@ -279,9 +278,8 @@ if(isset($_FILES['xml_file'])) {
                         <?php foreach ($arquivos as $arquivo): ?>
                             <tr>
                                 <td><?php echo str_replace('.tiff', '', basename($arquivo)); ?></td>
-                                <td><?php echo strftime('%d de %B de %Y', filemtime($arquivo)); ?></td>
+                                <td><?php echo date('Y-m-d', filemtime($arquivo)); ?></td>
                                 <td><?php echo strftime('%H:%M:%S', filemtime($arquivo)); ?></td>
-                                <!-- <td><?php echo pathinfo($arquivo, PATHINFO_EXTENSION); ?></td> -->
                                 <td><a class="btn first" style="text-align: center!important;" href="historico/<?php echo basename($arquivo); ?>" download>Download</a></td>
                                 <td><a class="btn first" href="pdf-viw/<?php echo str_replace('.tiff', '.pdf', basename($arquivo)); ?>" target="_blank">Visualizar</a></td>
                                 <td><a class="btn2-gradient delete-link" style="background: rgb(255 99 132 / 53%)" href="delete.php?file=<?php echo urlencode(basename($arquivo)); ?>"><i class="fa fa-trash-o fa-1x" style="color: #fff" aria-hidden="true"></i></a></td>
@@ -313,6 +311,58 @@ if(isset($_FILES['xml_file'])) {
 
     </div>
 
+<!-- RELATÓRIO DE CONVERSÃO -->
+<div class="container">
+    <h3 style="margin: 0px 0;">Relatório de Conversão</h3>
+
+    <div id="chart-container">
+        <canvas id="grafico"></canvas>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: 'data.php',
+                method: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    var ctx = document.getElementById('grafico').getContext('2d');
+                    var chart = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['Matrículas Convertidas', 'Matrículas Faltantes'],
+                            datasets: [{
+                                data: [data.convertidos, data.faltantes],
+                                backgroundColor: ['rgb(75 192 192 / 69%)', 'rgb(255 99 132 / 53%)'],
+                                borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)'],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function (context) {
+                                            var label = context.label || '';
+                                            var value = context.parsed || 0;
+                                            return label + ': ' + ((value / context.dataset.data.reduce((a, b) => a + b, 0)) * 100).toFixed(2) + '%';
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</div>
+
+    <!-- MATRICULAS FALTANTES -->
     <div class="container">
         <h3 style="margin: 0px 0;">Matrículas Faltantes - <?php echo count($numerosFaltantes); ?></h3>
             <h3 style="margin: 0px 0;">Intervalo verificado: <?php echo $minimo . ' - ' . $maximo; ?></h3>
@@ -321,20 +371,12 @@ if(isset($_FILES['xml_file'])) {
             <thead>
                 <tr>
                     <th>Matrícula Nº</th>
-                    <!-- <th>Data da última conversão</th>
-                    <th>Horário</th>
-                    <th>Tipo de Arquivo</th>
-                    <th>Download</th> -->
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($numerosFaltantes as $numeroFaltante): ?>
                     <tr>
                         <td><?php echo $numeroFaltante; ?></td>
-                        <!-- <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td> -->
                     </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -349,54 +391,6 @@ if(isset($_FILES['xml_file'])) {
         </script>
 </div>
 
-<div class="container">
-        <h3 style="margin: 0px 0;">Relatório de Conversão</h3>
-
-        <div id="chart-container">
-            <canvas id="grafico"></canvas>
-        </div>
-
-        <script>
-    $(document).ready(function(){
-        $.ajax({
-            url: 'data.php',
-            method: 'GET',
-            dataType: 'json',
-            success: function(data){
-                var ctx = document.getElementById('grafico').getContext('2d');
-                var chart = new Chart(ctx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['Matriculas Convertidas', 'Matrículas Faltantes'],
-                        datasets: [{
-                            data: [data.convertidos, data.faltantes],
-                            backgroundColor: ['rgb(75 192 192 / 69%)', 'rgb(255 99 132 / 53%)'],
-                            borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)'],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            datalabels: {
-                                color: '#fff',
-                                formatter: function(value, context) {
-                                    let total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                    let percentage = ((value / total) * 100).toFixed(2) + '%';
-                                    return value + ' (' + percentage + ')';
-                                }
-                            },
-                            legend: {
-                                position: 'top',
-                            },
-                        }
-                    },
-                });
-            }
-        });
-    });
-    </script>
-</div>
 
 <?php include_once("../rodape.php");?>
 

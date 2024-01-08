@@ -25,7 +25,6 @@ function getDataHoraArquivoZIP($arquivoZIP) {
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../js/chart.js"></script>
     <script src="path/to/chart-config.js"></script>
-    <?php include_once("../menu.php");?>
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/pop-up.js"></script>
 </head>
@@ -34,7 +33,8 @@ function getDataHoraArquivoZIP($arquivoZIP) {
 <div class="orb-container">
     <div class="orb"></div>
 </div>
-<h1>DocMark - Sinal Público</h1><br><br><br>
+<h1>DocMark - Sinal Público</h1>
+<?php include_once("../menu.php");?>
 
     <div class="container">
         <h3>Processar arquivos para adicionar o sinal público</h3>

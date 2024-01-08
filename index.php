@@ -23,7 +23,6 @@ verificar_sessao_ativa();
 <body>
 <div class="header">
     
-    <?php include_once("menu.php");?>
     
     <form id="form" action="logout.php" method="post">
         <input type="submit" class="third" value="Sair">
@@ -34,6 +33,8 @@ verificar_sessao_ativa();
       <div class="orb"></div>
       <h1>DocMark</h1>
     </div>
+
+    <?php include_once("menu.php");?><br>
 
         <div class='main-content-container'>
           <a class='container' style="text-decoration: none" href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/carimbo-digital/index.php'?>">
@@ -81,9 +82,9 @@ verificar_sessao_ativa();
             }
 
             .inner-header {
-              height:40vh;
-              width:100%;
-              margin: 0;
+              height: 20vh;
+              width: 100%;
+              margin-top: 60px;
               padding: 0;
             }
 
@@ -149,7 +150,6 @@ verificar_sessao_ativa();
             .main-content-container {
               max-width: 940px;
               margin: 0 auto;
-              margin-top: -100px;
               padding: 30px;
               background: none;
               display: flex;

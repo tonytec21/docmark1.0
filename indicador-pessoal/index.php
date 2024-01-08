@@ -128,7 +128,6 @@ function imprimirFormulario() {
     <link rel="icon" href="../img/logo.png" type="image/png">
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../js/chart.js"></script>
-    <?php include_once("../menu.php");?>
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/pop-up.js"></script>
     <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
@@ -169,7 +168,8 @@ function imprimirFormulario() {
     <div class="orb-container">
             <div class="orb"></div>
     </div>
-            <h1>DocMark - Logs do Indicador Pessoal</h1><br><br><br>
+            <h1>DocMark - Logs do Indicador Pessoal</h1>
+            <?php include_once("../menu.php");?>
             <div class="container">
             <div id="sincronizar">
                 <button class="btn2 first" id="sincronizar-button">Sincronizar arquivos de Log</button><?php imprimirFormulario(); ?>

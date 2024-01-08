@@ -26,14 +26,15 @@ function getDataHoraArquivoZIP($arquivoZIP) {
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../js/chart.js"></script>
     <script src="path/to/chart-config.js"></script>
-    <?php include_once("../menu.php");?>
+
 </head>
 <body>
 
     <div class="orb-container">
             <div class="orb"></div>
         </div>
-            <h1>DocMark - Carimbo Digital</h1><br><br><br>
+            <h1>DocMark - Carimbo Digital</h1>
+            <?php include_once("../menu.php");?>
         <!-- <nav class="menu">
             <ul>
                 <li><a href="index.php">Carimbo Digital</a></li>

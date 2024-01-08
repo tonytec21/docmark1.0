@@ -22,7 +22,7 @@ body {
 
 .container {
   overflow-y: auto;
-  max-width: 90%;
+  max-width: 70%;
   margin: 10px auto 50px;
   padding: 20px;
   border-radius: 50px;

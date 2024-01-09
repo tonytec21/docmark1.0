@@ -1,4 +1,5 @@
 <?php
+
 require_once('tcpdf/tcpdf.php');
 require_once('fpdf/fpdf.php');
 require_once('src/autoload.php');
@@ -8,7 +9,8 @@ use setasign\Fpdi\PdfReader;
 use setasign\Fpdi\FpdiTpl;
 
 // Função para adicionar o carimbo digital em cada página do PDF
-function addStampToPDF($pdfPath, $stampText) {
+function addStampToPDF($pdfPath, $stampText)
+{
     // Instancia a classe FPDI
     $pdf = new Fpdi();
 
@@ -33,11 +35,22 @@ function addStampToPDF($pdfPath, $stampText) {
 }
 
 // Função para copiar arquivo TIFF para diretório histórico
-function copyToHistory($tiffFileName) {
+function copyToHistory($tiffFileName)
+{
     $source = 'upload/' . $tiffFileName;
     $destination = '../pdf-para-tiff/historico/' . $tiffFileName;
     if (!copy($source, $destination)) {
         echo "Erro ao copiar $tiffFileName para o diretório histórico.";
+    }
+}
+
+// Função para copiar arquivo PDF para diretório pdf-viw
+function copyToPdfViw($pdfFileName, $numeroMatricula)
+{
+    $source = 'upload/' . $pdfFileName;
+    $destination = '../pdf-para-tiff/pdf-viw/' . $numeroMatricula . '.pdf';
+    if (!copy($source, $destination)) {
+        echo "Erro ao copiar $pdfFileName para o diretório pdf-viw.";
     }
 }
 
@@ -83,6 +96,9 @@ if (file_exists('cnm.json')) {
                 // Copy TIFF file to history directory
                 copyToHistory($tiffFileName);
 
+                // Copy PDF file to pdf-viw directory
+                copyToPdfViw($newFileName, $numeroMatricula);
+
                 // Add the TIFF file to the array of PDF files
                 array_push($pdfFiles, $tiffFileName);
 
@@ -117,14 +133,11 @@ if (file_exists('cnm.json')) {
         // Fecha o arquivo zip
         $zip->close();
 
-                // Enviar um sinal ao JavaScript informando que o processamento foi concluído
-                echo '<script>onProcessingComplete();</script>';
-        
+        // Exibir mensagem de confirmação e botão de redirecionamento
+        echo '<script>alert("Processamento concluído! Clique em OK para ir para o histórico."); window.location.href = "../pdf-para-tiff/historico.php";</script>';
 
-        // Força o download do arquivo zip
-        header("Content-Type: application/octet-stream");
-        header("Content-Disposition: attachment; filename={$zipFileName}");
-        readfile($zipFilePath);
+        // Enviar um sinal ao JavaScript informando que o processamento foi concluído
+        echo '<script>onProcessingComplete();</script>';
 
         // Exclui todos os arquivos PDF e TIFF da pasta de upload
         foreach ($pdfFiles as $pdfFile) {

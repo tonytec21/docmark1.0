@@ -1,5 +1,4 @@
 <?php
-// Inclua a função verificar_sessao_ativa()
 require_once 'funcoes.php';
 
 // Verifique se a sessão está ativa
@@ -11,7 +10,6 @@ verificar_sessao_ativa();
     <title>DocMark - Carimbo digital</title>
     <link rel="icon" href="../img/logo.png" type="image/png">
     <link rel="stylesheet" href="../css/styles.css">
-    <?php include_once("../menu.php");?>
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/pop-up.js"></script>
 </head>
@@ -20,16 +18,8 @@ verificar_sessao_ativa();
     <div class="orb-container">
             <div class="orb"></div>
         </div>
-            <h1>DocMark - Carimbo Digital</h1><br><br><br>
-        <!-- <nav class="menu">
-            <ul>
-                <li><a href="index.php">Carimbo Digital</a></li>
-                <li><a href="../pdf-para-tiff/index.php">Converter PDF para TIFF</a></li>
-                <li><a href="../single-tif-para-pdf/index.php">Converter TIFF para PDF</a></li>
-                <li><a href="index.php">Sinal Público</a></li>
-                <li><a href="configuracao.php">Configuração</a></li>
-             </ul>
-        </nav> -->
+            <h1>DocMark - Carimbo Digital</h1>
+            <?php include_once("../menu.php");?>
     
     <div class="container" style="margin-bottom: 17%">
         <h3>Arquivos processados</h3>
@@ -96,8 +86,7 @@ if (isset($_POST['submit'])) {
 ?>
 
         </div>
-        <br>
-        <a href="index.php" class="btn-gradient">Processar novos arquivos</a>
+
     </div>
 
     <?php include_once("../rodape.php");?>

@@ -41,10 +41,10 @@
       }
 </style>
 <div class="menu">
-            <a style="padding:20px" href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/index.php'?>" title="Página inicial"><i class="fa fa-home fa-2x" aria-hidden="true"></i><br>Página inicial</a>
-            <a style="padding:20px" href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/pdf-para-tiff/historico.php'?>" title="Controle de Conversões"><i class="fa fa-check-square-o fa-2x" aria-hidden="true"></i><br>Controle de Conversões</a>
-            <a style="padding:20px" href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/chancela/index.php'?>" title="Adicionar Sinal Público"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i><br>Adicionar Sinal Público</a> 
-            <a style="padding:20px" href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/indicador-pessoal/index.php'?>" title="Logs do Indicador Pessoal"><i class="fa fa-clock-o fa-2x" aria-hidden="true"></i><br>Logs do Indicador Pessoal</a>
-            <a style="padding:20px" href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/carimbo-digital/index.php'?>" title="Carimbo Digital"><i class="fa fa-edit fa-2x" aria-hidden="true"></i><br>Carimbo Digital</a>
-            <a style="padding:20px" href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/pdf-para-tiff/index.php'?>" title="Converter PDF para TIFF"><i class="fa fa-image fa-2x" aria-hidden="true"></i><br>Converter PDF para TIFF</a>
+            <a href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/index.php'?>" title="Página inicial"><i class="fa fa-home fa-2x" aria-hidden="true"></i><br>Página inicial</a>
+            <a href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/pdf-para-tiff/historico.php'?>" title="Controle de Conversões"><i class="fa fa-check-square-o fa-2x" aria-hidden="true"></i><br>Controle de Conversões</a>
+            <a href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/chancela/index.php'?>" title="Adicionar Sinal Público"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i><br>Adicionar Sinal Público</a> 
+            <a href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/indicador-pessoal/index.php'?>" title="Logs do Indicador Pessoal"><i class="fa fa-clock-o fa-2x" aria-hidden="true"></i><br>Logs do Indicador Pessoal</a>
+            <a href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/carimbo-digital/index.php'?>" title="Carimbo Digital"><i class="fa fa-edit fa-2x" aria-hidden="true"></i><br>Carimbo Digital</a>
+            <a href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/pdf-para-tiff/index.php'?>" title="Converter PDF para TIFF"><i class="fa fa-image fa-2x" aria-hidden="true"></i><br>Converter PDF para TIFF</a>
 </div>

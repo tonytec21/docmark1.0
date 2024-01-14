@@ -43,6 +43,7 @@
 <div class="menu">
             <a href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/index.php'?>" title="Página inicial"><i class="fa fa-home fa-2x" aria-hidden="true"></i><br>Página inicial</a>
             <a href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/pdf-para-tiff/historico.php'?>" title="Controle de Conversões"><i class="fa fa-check-square-o fa-2x" aria-hidden="true"></i><br>Controle de Conversões</a>
+            <a href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/pdf-para-tiff/historico-faltante.php'?>" title="Relatório de Conversão"><i class="fa fa-bar-chart fa-2x" aria-hidden="true"></i><br>Relatório</a>
             <a href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/chancela/index.php'?>" title="Adicionar Sinal Público"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i><br>Adicionar Sinal Público</a> 
             <a href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/indicador-pessoal/index.php'?>" title="Logs do Indicador Pessoal"><i class="fa fa-clock-o fa-2x" aria-hidden="true"></i><br>Logs do Indicador Pessoal</a>
             <a href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/carimbo-digital/index.php'?>" title="Carimbo Digital"><i class="fa fa-edit fa-2x" aria-hidden="true"></i><br>Carimbo Digital</a>

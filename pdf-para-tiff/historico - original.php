@@ -17,6 +17,18 @@ if (!empty($arquivos)) { // Verifica se a pasta contém arquivos
         $numeroArquivo = (int) str_replace('.tiff', '', basename($arquivo));
         $numerosArquivos[] = $numeroArquivo;
     }
+
+    // Obtém o intervalo de números
+    $minimo = 1;
+    $maximo = max($numerosArquivos);
+
+    // Obtém os números faltantes
+    $numerosFaltantes = array();
+    for ($i = $minimo; $i <= $maximo; $i++) {
+        if (!in_array($i, $numerosArquivos)) {
+            $numerosFaltantes[] = str_pad($i, 8, '0', STR_PAD_LEFT);
+        }
+    }
 }
 
 if(isset($_FILES['xml_file'])) {
@@ -298,6 +310,87 @@ if(isset($_FILES['xml_file'])) {
                 </script>
 
     </div>
+
+<!-- RELATÓRIO DE CONVERSÃO -->
+<div class="container">
+    <h3 style="margin: 0px 0;">Relatório de Conversão</h3>
+
+    <div id="chart-container">
+        <canvas id="grafico"></canvas>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: 'data.php',
+                method: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    var ctx = document.getElementById('grafico').getContext('2d');
+                    var chart = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['Matrículas Convertidas', 'Matrículas Faltantes'],
+                            datasets: [{
+                                data: [data.convertidos, data.faltantes],
+                                backgroundColor: ['rgb(75 192 192 / 69%)', 'rgb(255 99 132 / 53%)'],
+                                borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)'],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function (context) {
+                                            var label = context.label || '';
+                                            var value = context.parsed || 0;
+                                            return label + ': ' + ((value / context.dataset.data.reduce((a, b) => a + b, 0)) * 100).toFixed(2) + '%';
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</div>
+
+    <!-- MATRICULAS FALTANTES -->
+    <div class="container">
+        <h3 style="margin: 0px 0;">Matrículas Faltantes - <?php echo count($numerosFaltantes); ?></h3>
+            <h3 style="margin: 0px 0;">Intervalo verificado: <?php echo $minimo . ' - ' . $maximo; ?></h3>
+
+            <table id="tabela-historico2" class="display">
+            <thead>
+                <tr>
+                    <th>Matrícula Nº</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($numerosFaltantes as $numeroFaltante): ?>
+                    <tr>
+                        <td><?php echo $numeroFaltante; ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
+        <script>
+        $(document).ready(function() {
+            $('#tabela-historico2').DataTable({
+                "order": [[ 0, "asc" ]]
+            });
+        });
+        </script>
+</div>
+
 
 <?php include_once("../rodape.php");?>
 

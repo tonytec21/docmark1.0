@@ -17,6 +17,18 @@ if (!empty($arquivos)) { // Verifica se a pasta contém arquivos
         $numeroArquivo = (int) str_replace('.tiff', '', basename($arquivo));
         $numerosArquivos[] = $numeroArquivo;
     }
+
+    // Obtém o intervalo de números
+    $minimo = 1;
+    $maximo = max($numerosArquivos);
+
+    // Obtém os números faltantes
+    $numerosFaltantes = array();
+    for ($i = $minimo; $i <= $maximo; $i++) {
+        if (!in_array($i, $numerosArquivos)) {
+            $numerosFaltantes[] = str_pad($i, 8, '0', STR_PAD_LEFT);
+        }
+    }
 }
 
 if(isset($_FILES['xml_file'])) {
@@ -116,7 +128,6 @@ if(isset($_FILES['xml_file'])) {
                         <button class="btn2 first" id="visualizar-indicador">Visualizar Indicador Pessoal</button>
             </div>
             <br>
-            <h3>Histórico de Matrículas Convertidas</h3>
 
                 <div id="popup" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background-color:rgba(0,0,0,0.5); text-align:center;">
                     <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background-color:white; padding:20px; border-radius:5px;">
@@ -250,54 +261,86 @@ if(isset($_FILES['xml_file'])) {
 
         </script>
 
-        <!-- HISTÓRICO DE MATRÍCULAS CONVERTIDAS -->
-                    <table id="tabela-historico" class="display">
-                    <thead>
-                        <tr>
-                            <th>Matrícula Nº</th>
-                            <th>Data da última conversão</th>
-                            <th>Horário</th>
-                            <th>Download TIFF</th>
-                            <th>Visualizar</th>
-                            <th>Excluir</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($arquivos as $arquivo): ?>
-                            <tr>
-                                <td><?php echo str_replace('.tiff', '', basename($arquivo)); ?></td>
-                                <td><?php echo date('Y-m-d', filemtime($arquivo)); ?></td>
-                                <td><?php echo strftime('%H:%M:%S', filemtime($arquivo)); ?></td>
-                                <td><a class="btn first" style="text-align: center!important;" href="historico/<?php echo basename($arquivo); ?>" download>Download</a></td>
-                                <td><a class="btn first" href="pdf-viw/<?php echo str_replace('.tiff', '.pdf', basename($arquivo)); ?>" target="_blank">Visualizar</a></td>
-                                <td><a class="btn2-gradient delete-link" style="background: rgb(255 99 132 / 53%)" href="delete.php?file=<?php echo urlencode(basename($arquivo)); ?>"><i class="fa fa-trash-o fa-1x" style="color: #fff" aria-hidden="true"></i></a></td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-                
-                <script>
-                    $(document).ready(function() {
-                        $('.delete-link').on('click', function(e) {
-                            e.preventDefault();
-                            let href = $(this).attr('href');
-                            let confirmBox = confirm('Tem certeza de que deseja excluir esta matrícula?');
-                            if (confirmBox) {
-                                window.location.href = href;
-                            }
-                        });
-                    });
-                </script>
+<!-- RELATÓRIO DE CONVERSÃO -->
+<div class="container">
+    <h3 style="margin: 0px 0;">Relatório de Conversão</h3>
 
-                <script>
-                $(document).ready(function() {
-                    $('#tabela-historico').DataTable({
-                        "order": [[ 0, "asc" ]]
-                    });
-                });
-                </script>
+    <h3 style="margin: 0px 0;">Matrículas Faltantes - <?php echo count($numerosFaltantes); ?></h3>
 
+    <div id="chart-container">
+        <canvas id="grafico"></canvas>
     </div>
+
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: 'data.php',
+                method: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    var ctx = document.getElementById('grafico').getContext('2d');
+                    var chart = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['Matrículas Convertidas', 'Matrículas Faltantes'],
+                            datasets: [{
+                                data: [data.convertidos, data.faltantes],
+                                backgroundColor: ['rgb(75 192 192 / 69%)', 'rgb(255 99 132 / 53%)'],
+                                borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)'],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function (context) {
+                                            var label = context.label || '';
+                                            var value = context.parsed || 0;
+                                            return label + ': ' + ((value / context.dataset.data.reduce((a, b) => a + b, 0)) * 100).toFixed(2) + '%';
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</div>
+
+<h3 style="margin: 0px 0;">Lista de Matrículas Faltantes</h3>
+            <!-- <h3 style="margin: 0px 0;">Intervalo verificado: <?php echo $minimo . ' - ' . $maximo; ?></h3> -->
+
+            <table id="tabela-historico2" class="display">
+            <thead>
+                <tr>
+                    <th>Matrícula Nº</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($numerosFaltantes as $numeroFaltante): ?>
+                    <tr>
+                        <td><?php echo $numeroFaltante; ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
+        <script>
+        $(document).ready(function() {
+            $('#tabela-historico2').DataTable({
+                "order": [[ 0, "asc" ]]
+            });
+        });
+        </script>
+</div>
+
 
 <?php include_once("../rodape.php");?>
 

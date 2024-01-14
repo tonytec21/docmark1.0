@@ -7,7 +7,7 @@
       display: flex;
       overflow: hidden;
       justify-content: space-evenly;
-      height: 60px;
+      height: auto;
       padding-left: 140px;
       padding-right: 140px;
       background: rgba(255, 255, 255, 0.08);
@@ -18,7 +18,7 @@
       }
 
       .menu a {
-      padding: 20px;
+      padding: 10px;
       text-decoration: none;
       font-size: 14px;
       color: white;

@@ -70,7 +70,7 @@ if(isset($_FILES['xml_file'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>DocMark - Controle de Conversões</title>
+    <title>DocMark - Relatório</title>
     <link rel="icon" href="../img/logo.png" type="image/png">
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../js/chart.js"></script>
@@ -102,7 +102,7 @@ if(isset($_FILES['xml_file'])) {
     <div class="orb-container">
             <div class="orb"></div>
     </div>
-            <h1>DocMark - Controle de Conversões</h1>
+            <h1>DocMark - Relatório</h1>
             <?php include_once("../menu.php");?>
             <!-- SINAL PÚBLICO E INDICADOR PESSOAL -->
             <div class="container">

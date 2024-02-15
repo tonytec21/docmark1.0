@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <?php endif; ?>
                 <label for="empresa_id">Login de Cadastro:</label>
                 <select name="empresa_id" required>
-                    <option value="1">Cartório</option>
+                    <option value="1">Registro de Imóveis</option>
                 </select>
                 <br>
                 <label for="usuario">Usuário:</label>

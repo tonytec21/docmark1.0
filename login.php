@@ -23,7 +23,7 @@
         <h2>Acesso restrito</h2>
         <label for="empresa_id">Escolha seu cartório:</label>
         <select name="empresa_id" required>
-            <option value="1">Cartório - Ofício Único</option>
+            <option value="1">Registro de Imóveis</option>
         </select>
         <br>
         <label for="usuario">Usuário:</label>

@@ -33,6 +33,7 @@
         <input type="password" name="senha" required>
         <br>
         <input type="submit" class="bt" value="Entrar">
+        <a style="text-decoration: none; margin: 10px 0px 0px 2px; color: #fff;text-shadow: 0 0 10px rgba(0,0,0,0.3);letter-spacing: 1px;text-align: left;font-size: 12px;" href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/login-cadastro.php'?>">CADASTRAR FUNCIONÁRIO</a>
     </form>
 
     <script>

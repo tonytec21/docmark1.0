@@ -16,16 +16,14 @@
       align-items: center;
       text-align: center;
       }
-
-      .menu a {
+    .menu a {
       padding: 10px;
       text-decoration: none;
       font-size: 14px;
       color: white;
       transition: background-color 0.3s ease;
       }
-
-      .menu a:hover {
+    .menu a:hover {
       background: #02a146e8;
       color: #fff!important;
       -webkit-transition: 0.5s;
@@ -33,9 +31,8 @@
       border-color: none;
       box-shadow: 0 0px 30px;
       }
-
-      @media screen and (max-width: 600px) {
-      .menu {
+    @media screen and (max-width: 600px) {
+    .menu {
       flex-direction: column;
       }
       }

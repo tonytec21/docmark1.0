@@ -1,11 +1,9 @@
 <?php
 // Inclua a função verificar_sessao_ativa()
 require_once 'funcoes.php';
-
 // Verifique se a sessão está ativa
 verificar_sessao_ativa();
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,59 +11,46 @@ verificar_sessao_ativa();
     <link rel="icon" href="img/logo.png" type="image/png">
     <link rel="stylesheet" href="css/styles.css">
     <style>
-  #form {
-    display: flex;
-    flex-direction: row-reverse;
-}
-  </style>
-
+        #form {
+          display: flex;
+          flex-direction: row-reverse;
+        }
+    </style>
   </head>
 <body>
-<div class="header">
-    
-    
-    <form id="form" action="logout.php" method="post">
-        <input type="submit" class="third" value="Sair">
-    </form>
-    
+  <div class="header">
+      <form id="form" action="logout.php" method="post">
+          <input type="submit" class="third" value="Sair">
+      </form>
+      <div class="inner-header flex">
+        <div class="orb"></div>
+        <h1>DocMark</h1>
+      </div>
 
-    <div class="inner-header flex">
-      <div class="orb"></div>
-      <h1>DocMark</h1>
-    </div>
-
-    <?php include_once("menu.php");?><br>
-
+  <?php include_once("menu.php");?><br>
         <div class='main-content-container'>
           <a class='container' style="text-decoration: none" href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/carimbo-digital/index.php'?>">
             <i class="fa fa-edit fa-2x" style="color: #fff" aria-hidden="true"></i><p style="color: #fff" class='image-caption'>Carimbo Digital</p>
           </a>
-
           <a class='container' style="text-decoration: none" href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/pdf-para-tiff/index.php'?>">
            <i class="fa fa-image fa-2x" style="color: #fff" aria-hidden="true"></i><p style="color: #fff" class='image-caption'>Converter PDF para TIFF</p>
           </a>
-
           <a class='container' style="text-decoration: none" href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/pdf-para-tiff/historico.php'?>">
             <i class="fa fa-check-square-o fa-2x" style="color: #fff" aria-hidden="true"></i><p style="color: #fff" class='image-caption'>Controle de Conversões</p>
           </a>
-
           <a class='container' style="text-decoration: none" href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/indicador-pessoal/index.php'?>">
             <i class="fa fa-clock-o fa-2x" style="color: #fff" aria-hidden="true"></i><p style="color: #fff" class='image-caption'>Logs do Indicador Pessoal</p>
           </a>
-          
           <a class='container' style="text-decoration: none" href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/chancela/index.php'?>">
             <i class="fa fa-pencil-square fa-2x" style="color: #fff" aria-hidden="true"></i><p style="color: #fff" class='image-caption'>Adicionar Sinal Público</p>
           </a>
-
           <a class='container' style="text-decoration: none" href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/indicador-pessoal/matriculas.php'?>">
             <i class="fa fa-user-plus fa-2x" style="color: #fff" aria-hidden="true"></i><p style="color: #fff" class='image-caption'>Cadastrar Indicador Pessoal</p>
           </a>
         </div>
-
-        <?php include_once("rodape.php");?>
-      
-        <style>
-          
+  </div>
+  <?php include_once("rodape.php");?>
+    <style>
             h1 {
               font-family: "Segoe UI",Arial,sans-serif;
               font-weight:300;
@@ -82,7 +67,7 @@ verificar_sessao_ativa();
             }
 
             .inner-header {
-              height: 20vh;
+              height: 15vh;
               width: 100%;
               margin-top: 60px;
               padding: 0;
@@ -204,7 +189,6 @@ verificar_sessao_ativa();
               border-bottom-left-radius: 4px;
               border-bottom-right-radius: 4px;
             }
-        </style>
-
+      </style>
   </body>
 </html

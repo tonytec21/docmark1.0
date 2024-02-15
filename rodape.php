@@ -14,13 +14,11 @@ viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
 </svg>
 </div>
 <!--Waves Fim-->
-
 <!--Rodapé inicio-->
 <div class="content flex">
 <p style="text-decoration: none"> <p><a style="text-decoration: none"  href="https://backupcloud.site/" target="_blank">&copy; <span id="year"></span> DocMark | By Backup Cloud. Todos os direitos reservados.</a></p></p>
 </div>
 <!--Rodape fim-->
-
     <script>
         // Obtém o ano atual e insere no elemento de ID "year"
         document.getElementById("year").textContent = new Date().getFullYear();

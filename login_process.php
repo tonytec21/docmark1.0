@@ -5,11 +5,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $empresa_id = $_POST["empresa_id"];
     $usuario = $_POST["usuario"];
     $senha = $_POST["senha"];
-
     // Carregar os dados do arquivo JSON
     $jsonData = file_get_contents('data.json');
     $data = json_decode($jsonData, true);
-
     // Encontrar o usuário com base no nome de usuário e empresa_id
     $foundUser = null;
     foreach ($data['usuarios'] as $user) {
@@ -18,16 +16,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             break;
         }
     }
-
     // Verifica se o usuário foi encontrado e se a senha está correta
     if ($foundUser && $senha === $foundUser['senha']) {
         // Credenciais corretas, iniciar a sessão
         session_start();
         $_SESSION["user_id"] = $foundUser['id'];
         $_SESSION["empresa_id"] = $foundUser['empresa_id'];
-
-        
-
         // Redirecionar para o diretório da empresa
         $empresa = null;
         foreach ($data['empresas'] as $emp) {
@@ -36,7 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 break;
             }
         }
-
         if ($empresa) {
             header("Location: " . $empresa['diretorio_index']);
         } else {

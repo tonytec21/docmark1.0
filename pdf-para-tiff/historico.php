@@ -251,6 +251,16 @@ if(isset($_FILES['xml_file'])) {
         </script>
 
         <!-- HISTÓRICO DE MATRÍCULAS CONVERTIDAS -->
+        <form method="GET">
+            <div class="col-lg-6">
+                <label for="country">Data Inicial:</label>
+                <input style="border-radius: 15px;padding: 0px 10px 0px 10px;" type="date" name="dtinicial">
+                <label for="country">Data Final:</label>
+                <input style="border-radius: 15px;padding: 0px 10px 0px 10px;" type="date" name="dtfinal">
+                <button class="btn2 first" type="submit">Buscar</button>
+            </div>
+            <br>
+        </form>
                     <table id="tabela-historico" class="display">
                     <thead>
                         <tr>
@@ -263,7 +273,21 @@ if(isset($_FILES['xml_file'])) {
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($arquivos as $arquivo): ?>
+                        <?php 
+                        $inicio_semana = strtotime('last monday', strtotime('tomorrow'));
+                        $fim_semana = strtotime('next sunday', strtotime('tomorrow'));
+
+                        if (isset($_GET['dtinicial'])) {
+                            $inicio_semana = strtotime($_GET['dtinicial']);
+                        }
+                        if (isset($_GET['dtfinal'])) {
+                            $fim_semana = strtotime($_GET['dtfinal']);
+                        }
+                        foreach ($arquivos as $arquivo):
+
+                           $data_timestamp = strtotime(date('Y-m-d', filemtime($arquivo)));
+                           if ($data_timestamp >= $inicio_semana && $data_timestamp <= $fim_semana):
+                         ?>
                             <tr>
                                 <td><?php echo str_replace('.tiff', '', basename($arquivo)); ?></td>
                                 <td><?php echo date('Y-m-d', filemtime($arquivo)); ?></td>
@@ -272,7 +296,9 @@ if(isset($_FILES['xml_file'])) {
                                 <td><a class="btn first" href="pdf-viw/<?php echo str_replace('.tiff', '.pdf', basename($arquivo)); ?>" target="_blank">Visualizar</a></td>
                                 <td><a class="btn2-gradient delete-link" style="background: rgb(255 99 132 / 53%)" href="delete.php?file=<?php echo urlencode(basename($arquivo)); ?>"><i class="fa fa-trash-o fa-1x" style="color: #fff" aria-hidden="true"></i></a></td>
                             </tr>
-                        <?php endforeach; ?>
+                        <?php 
+                    endif;
+                    endforeach; ?>
                     </tbody>
                 </table>
                 
@@ -292,7 +318,7 @@ if(isset($_FILES['xml_file'])) {
                 <script>
                 $(document).ready(function() {
                     $('#tabela-historico').DataTable({
-                        "order": [[ 0, "asc" ]]
+                        order:[0, 'desc']
                     });
                 });
                 </script>

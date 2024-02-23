@@ -1,9 +1,25 @@
 <?php
-// Inclua a função verificar_sessao_ativa()
+// Função verificar_sessao_ativa()
 require_once 'funcoes.php';
 
 // Verifique se a sessão está ativa
 verificar_sessao_ativa();
+
+// Função para limpar os arquivos PDF dentro do diretório "pdfs"
+function limparPastaPDFs($pastaPDFs)
+{
+    $arquivosPDF = glob($pastaPDFs . '/*.pdf');
+    foreach ($arquivosPDF as $arquivoPDF) {
+        unlink($arquivoPDF);
+    }
+}
+
+// Pasta onde estão armazenados os arquivos ZIP
+$pastaArquivos = __DIR__ . '/arquivos';
+$pastaPDFs = __DIR__ . '/pdfs';
+
+// Limpa os arquivos PDF sempre que a página for carregada
+limparPastaPDFs($pastaPDFs);
 ?>
 <?php
 ob_start();

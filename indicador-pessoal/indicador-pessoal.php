@@ -33,7 +33,6 @@ function formatDateToBrazilian($dateString) {
     <link rel="icon" href="../img/logo.png" type="image/png">
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../js/chart.js"></script>
-    <?php include_once("../menu.php");?>
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/pop-up.js"></script>
     <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
@@ -41,9 +40,10 @@ function formatDateToBrazilian($dateString) {
     <script src="js/chart.js"></script>
     <script src="js/chartjs-plugin-datalabels.js"></script>
     <script type="text/javascript" charset="utf8" src="js/jquery-3.5.1.js"></script>
+    <!-- <script type="text/javascript" charset="utf8" src="js/jquery.dataTables.js"></script> -->
     <script type="text/javascript" charset="utf8" src="js/jquery.dataTables2.js"></script>
-   
-   <style>
+
+    <style>
     select {
         color: #0d181b;
         margin-left: 5px;
@@ -64,8 +64,9 @@ function formatDateToBrazilian($dateString) {
     }
     form{
         display: flex;
-    flex-direction: row;
-    align-items: center;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
     }
     .container{
         max-width: 90%;
@@ -77,7 +78,9 @@ function formatDateToBrazilian($dateString) {
     <div class="orb-container">
             <div class="orb"></div>
     </div>
-            <h1>DocMark - Indicador Pessoal</h1><br><br><br>
+            <h1>DocMark - Indicador Pessoal</h1>
+            <?php include_once("../menu.php");?>
+            <!-- SINAL PÚBLICO E INDICADOR PESSOAL -->
             <div class="container">
             <?php
             function compareFileDates($a, $b) {
@@ -150,6 +153,8 @@ function formatDateToBrazilian($dateString) {
         $('#example').DataTable();
     } );
 </script>
-    <?php include_once("../rodape.php");?>
+
+<?php include_once("../rodape.php");?>
+
 </body>
 </html>

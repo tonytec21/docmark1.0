@@ -24,7 +24,6 @@ function formatarDocumento($documento) {
     <link rel="icon" href="../img/logo.png" type="image/png">
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../js/chart.js"></script>
-    <?php include_once("../menu.php");?>
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/pop-up.js"></script>
     <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
@@ -32,63 +31,19 @@ function formatarDocumento($documento) {
     <script src="js/chart.js"></script>
     <script src="js/chartjs-plugin-datalabels.js"></script>
     <script type="text/javascript" charset="utf8" src="js/jquery-3.5.1.js"></script>
-    <script type="text/javascript" charset="utf8" src="js/jquery.dataTables2.js"></script>
-   
-    <style>
-        select {
-            color: #0d181b;
-            margin-left: 5px;
-            margin-right: 5px;
-            border-radius: 50px;
-            padding: 5px;
-            background: rgb(255 255 255 / 52%);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(6.9px);
-            -webkit-backdrop-filter: blur(6.9px);
-            color: #333;
-        }
-        .verificador {
-            display: flex;
-            align-content: center;
-            flex-direction: column;
-            flex-wrap: wrap;
-        }
-        form {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-        }
-        .container {
-            max-width: 90%;
-        }
-    </style>
+    <script type="text/javascript" charset="utf8" src="js/jquery.dataTables.js"></script>
 
-<script>
-    $(document).ready(function() {
-        $('#matriculasTable').DataTable({
-            "columnDefs": [
-                { "width": "7%", "targets": 0 },  // MATRÍCULA
-                { "width": "33%", "targets": 1 },  // PROPRIETÁRIOS
-                { "width": "15%", "targets": 2 },  // CPF/CNPJ
-                { "width": "15%", "targets": 3 },  // DATA DE ATUALIZAÇÃO
-                { "width": "10%", "targets": 4 },  // VISUALIZAR
-                { "width": "2%", "targets": 5 }   // EXCLUIR
-            ],
-            "autoWidth": false
-        });
-    });
-</script>
 <style>
     form {
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
+        align-items: center;
     }
     #sincronizar2{
         margin-left: 60%;
         margin-top: -7%;
     }
-    
     /* Estilos para o modal */
 .modal {
     display: none;
@@ -136,15 +91,19 @@ input[type="text"]{
     flex-direction: row;
     justify-content: space-around;
 }
+    
     </style>
 </head>
 <body>
+
     <div class="orb-container">
-        <div class="orb"></div>
+            <div class="orb"></div>
     </div>
-    <h1>DocMark - Matrículas Cadastradas</h1><br><br><br>
-    <div class="container">
-    <div id="sincronizar3">
+            <h1>DocMark - Matrículas Cadastradas</h1>
+            <?php include_once("../menu.php");?>
+            <!-- SINAL PÚBLICO E INDICADOR PESSOAL -->
+            <div class="container">
+            <div id="sincronizar3">
                 <button class="btn2 first" id="modalcadastro">Cadastrar Matrícula</button>
                 <button class="btn2 first" id="visualizar-indicador">Visualizar XML do Indicador Pessoal</button>
                 <button class="btn2 first" id="modalgerarXML">Gerar Arquivo XML</button>
@@ -401,6 +360,8 @@ input[type="text"]{
 
 
     </div>
-    <?php include_once("../rodape.php");?>
+
+<?php include_once("../rodape.php");?>
+
 </body>
 </html>

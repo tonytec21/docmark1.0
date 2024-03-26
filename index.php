@@ -67,7 +67,7 @@ verificar_sessao_ativa();
             }
 
             .inner-header {
-              height: 15vh;
+              height: auto;
               width: 100%;
               margin-top: 60px;
               padding: 0;

@@ -31,7 +31,7 @@ function formatarDocumento($documento) {
     <script src="js/chart.js"></script>
     <script src="js/chartjs-plugin-datalabels.js"></script>
     <script type="text/javascript" charset="utf8" src="js/jquery-3.5.1.js"></script>
-    <script type="text/javascript" charset="utf8" src="js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="js/jquery.dataTables2.js"></script>
 
 <style>
     form {

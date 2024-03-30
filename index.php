@@ -47,6 +47,9 @@ verificar_sessao_ativa();
           <a class='container' style="text-decoration: none" href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/indicador-pessoal/matriculas.php'?>">
             <i class="fa fa-user-plus fa-2x" style="color: #fff" aria-hidden="true"></i><p style="color: #fff" class='image-caption'>Cadastrar Indicador Pessoal</p>
           </a>
+          <a class='container' style="text-decoration: none" href="<?= 'http://' . $_SERVER['HTTP_HOST'] . '/docmark/indicador-real/index.php'?>">
+            <i class="fa fa-university fa-2x" style="color: #fff" aria-hidden="true"></i><p style="color: #fff" class='image-caption'>Cadastrar Indicador Real</p>
+          </a>
         </div>
   </div>
   <?php include_once("rodape.php");?>

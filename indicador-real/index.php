@@ -885,16 +885,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <table id="matriculasTable" class="display">
     <thead>
         <tr>
-            <th>NÚMERO DE REGISTRO</th>
-            <th>TIPO DE REGISTRO</th>
-            <th>TIPO DE IMÓVEL</th>
-            <th>LOCALIZAÇÃO</th>
-            <th>ENDEREÇO</th>
-            <th>NÚMERO</th>
-            <th>BAIRRO</th>
-            <th>CIDADE</th>
-            <th>DOWNLOAD</th>
-            <th>EXCLUIR</th>
+            <th>Número de Registro</th>
+            <th>Tipo de Registro</th>
+            <th>Tipo de Imóvel</th>
+            <th>Localização</th>
+            <th>Endereço</th>
+            <th>Número</th>
+            <th>Bairro</th>
+            <th>Cidade</th>
+            <th>Download</th>
+            <th>Excluir</th>
         </tr>
     </thead>
     <tbody>

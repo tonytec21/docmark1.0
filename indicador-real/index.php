@@ -212,7 +212,7 @@ select{
     <h2>Cadastrar Indicador Real</h2>
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
     <label for="numero_registro">Número de Registro (*)</label>
-    <input type="text" id="numero_registro" name="numero_registro" required oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="Digite apenas números">
+    <input type="text" id="numero_registro" name="numero_registro" required oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="Ex.: 123...">
     
     <label for="registro_tipo">Tipo de Registro (*)</label>
     <select id="registro_tipo" name="registro_tipo" required>

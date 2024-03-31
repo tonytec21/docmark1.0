@@ -817,7 +817,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Monta o array com os dados do formulário
     $data = array(
         "INDICADOR_REAL" => array(
-            "CNS" => "144618",
+            "CNS" => "000000",
             "REAL" => array(
                 array(
                     "TIPOENVIO" => 0,

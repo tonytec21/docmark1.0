@@ -804,12 +804,12 @@ select{
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Dados do formulário
     $numero_registro = $_POST['numero_registro'];
-    $registro_tipo = $_POST['registro_tipo'];
-    $tipo_imovel = $_POST['tipo_imovel'];
-    $localizacao = $_POST['localizacao'];
-    $uf = $_POST['uf'];
-    $cidade = $_POST['cidade'];
-    $tipo_logradouro = $_POST['tipo_logradouro'];
+    $registro_tipo = (int)$_POST['registro_tipo'];
+    $tipo_imovel = (int)$_POST['tipo_imovel'];
+    $localizacao = (int)$_POST['localizacao'];
+    $uf = (int)$_POST['uf'];
+    $cidade = (int)$_POST['cidade'];
+    $tipo_logradouro = (int)$_POST['tipo_logradouro'];
     $nome_logradouro = $_POST['nome_logradouro'];
     $numero_logradouro = $_POST['numero_logradouro'];
     $bairro = $_POST['bairro'];
@@ -817,7 +817,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Monta o array com os dados do formulário
     $data = array(
         "INDICADOR_REAL" => array(
-            "CNS" => "000000",
+            "CNS" => "144618",
             "REAL" => array(
                 array(
                     "TIPOENVIO" => 0,
@@ -861,7 +861,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         )
     );
 
-    // Converte o array para JSON
+    // Converte o array para JSON com indentação
     $json_data = json_encode($data, JSON_PRETTY_PRINT);
 
     // Nome do arquivo
@@ -876,6 +876,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Exibe uma mensagem de sucesso
     echo "Indicador salvo com sucesso";
 }
+
 ?>
 </div>
     

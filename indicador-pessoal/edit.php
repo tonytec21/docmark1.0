@@ -33,11 +33,10 @@ if (isset($_GET['matricula'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>DocMark - Editar Indicador Pessoal</title>
+    <title>DocMark - Matrículas Cadastradas</title>
     <link rel="icon" href="../img/logo.png" type="image/png">
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../js/chart.js"></script>
-    <?php include_once("../menu.php");?>
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/pop-up.js"></script>
     <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
@@ -161,11 +160,14 @@ input[type="text"]{
     </script>
 </head>
 <body>
+
     <div class="orb-container">
-        <div class="orb"></div>
+            <div class="orb"></div>
     </div>
-    <h1>DocMark - Editar Indicador Pessoal</h1><br><br><br>
-    <div class="container">
+            <h1>DocMark - Indicador Pessoal</h1>
+            <?php include_once("../menu.php");?>
+            <!-- SINAL PÚBLICO E INDICADOR PESSOAL -->
+            <div class="container">
 
     <h3>Editar Indicador Pessoal</h3>
     <form action="update.php" method="POST">

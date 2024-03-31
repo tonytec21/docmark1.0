@@ -797,87 +797,104 @@ select{
     <label for="bairro">Bairro (*)</label>
     <input type="text" id="bairro" name="bairro" placeholder="Ex.: Centro" required>
 
-    <input type="submit" class="btn2 first" style="margin-right: -315%!important; margin-left: 50px!important;margin-top: -13px!important;padding: 0.3em 0.0em!important;" value="Salvar">
+    <label for="cep">CEP (*)</label>
+    <input type="text" id="cep" name="cep" required oninput="this.value = this.value.replace(/[^0-9]/g, '')" maxlength="8" placeholder="Ex.: 65248000"d> 
+
+    <input type="submit" class="btn2 first" style="margin-right: -110%!important; margin-left: 50px!important;margin-top: -13px!important;padding: 0.3em 0.0em!important;" value="Salvar">
 </form>
 
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Dados do formulário
-    $numero_registro = $_POST['numero_registro'];
-    $registro_tipo = (int)$_POST['registro_tipo'];
-    $tipo_imovel = (int)$_POST['tipo_imovel'];
-    $localizacao = (int)$_POST['localizacao'];
-    $uf = (int)$_POST['uf'];
-    $cidade = (int)$_POST['cidade'];
-    $tipo_logradouro = (int)$_POST['tipo_logradouro'];
-    $nome_logradouro = $_POST['nome_logradouro'];
-    $numero_logradouro = $_POST['numero_logradouro'];
-    $bairro = $_POST['bairro'];
+    // Carrega o conteúdo do arquivo CNS JSON
+    $cns_file = "../carimbo-digital/cns.json";
+    $cns_data = file_get_contents($cns_file);
+    $cns_json = json_decode($cns_data, true);
 
-    // Monta o array com os dados do formulário
-    $data = array(
-        "INDICADOR_REAL" => array(
-            "CNS" => "000000",
-            "REAL" => array(
-                array(
-                    "TIPOENVIO" => 0,
-                    "NUMERO_REGISTRO" => $numero_registro,
-                    "REGISTRO_TIPO" => $registro_tipo,
-                    "TIPO_DE_IMOVEL" => $tipo_imovel,
-                    "LOCALIZACAO" => $localizacao,
-                    "TIPO_LOGRADOURO" => $tipo_logradouro,
-                    "NOME_LOGRADOURO" => $nome_logradouro,
-                    "NUMERO_LOGRADOURO" => $numero_logradouro,
-                    "UF" => $uf,
-                    "CIDADE" => $cidade,
-                    "BAIRRO" => $bairro,
-                    "CEP" => "",
-                    "COMPLEMENTO" => "",
-                    "QUADRA" => "",
-                    "CONJUNTO" => "",
-                    "SETOR" => "",
-                    "LOTE" => "",
-                    "LOTEAMENTO" => "",
-                    "CONTRIBUINTE" => array(""),
-                    "RURAL" => array(
-                        "CAR" => "",
-                        "NIRF" => "",
-                        "CCIR" => "",
-                        "NUMERO_INCRA" => "",
-                        "SIGEF" => "",
-                        "DENOMINACAORURAL" => "",
-                        "ACIDENTEGEOGRAFICO" => ""
-                    ),
-                    "CONDOMINIO" => array(
-                        "NOME_CONDOMINIO" => "",
-                        "BLOCO" => "",
+    // Verifica se o CNS foi carregado corretamente
+    if ($cns_json && isset($cns_json['cns'])) {
+        $cns_numero = $cns_json['cns'];
+
+        // Dados do formulário
+        $numero_registro = $_POST['numero_registro'];
+        $registro_tipo = (int)$_POST['registro_tipo'];
+        $tipo_imovel = (int)$_POST['tipo_imovel'];
+        $localizacao = (int)$_POST['localizacao'];
+        $uf = (int)$_POST['uf'];
+        $cidade = (int)$_POST['cidade'];
+        $tipo_logradouro = (int)$_POST['tipo_logradouro'];
+        $nome_logradouro = $_POST['nome_logradouro'];
+        $numero_logradouro = $_POST['numero_logradouro'];
+        $bairro = $_POST['bairro'];
+        $cep = (int)$_POST['cep'];
+
+        // Monta o array com os dados do formulário
+        $data = array(
+            "INDICADOR_REAL" => array(
+                "CNS" => $cns_numero,
+                "REAL" => array(
+                    array(
+                        "TIPOENVIO" => 0,
+                        "NUMERO_REGISTRO" => $numero_registro,
+                        "REGISTRO_TIPO" => $registro_tipo,
+                        "TIPO_DE_IMOVEL" => $tipo_imovel,
+                        "LOCALIZACAO" => $localizacao,
+                        "TIPO_LOGRADOURO" => $tipo_logradouro,
+                        "NOME_LOGRADOURO" => $nome_logradouro,
+                        "NUMERO_LOGRADOURO" => $numero_logradouro,
+                        "UF" => $uf,
+                        "CIDADE" => $cidade,
+                        "BAIRRO" => $bairro,
+                        "CEP" => $cep,
+                        "COMPLEMENTO" => "",
+                        "QUADRA" => "",
                         "CONJUNTO" => "",
-                        "TORRE" => "",
-                        "APTO" => "",
-                        "VAGA" => ""
+                        "SETOR" => "",
+                        "LOTE" => "",
+                        "LOTEAMENTO" => "",
+                        "CONTRIBUINTE" => array(""),
+                        "RURAL" => array(
+                            "CAR" => "",
+                            "NIRF" => "",
+                            "CCIR" => "",
+                            "NUMERO_INCRA" => "",
+                            "SIGEF" => "",
+                            "DENOMINACAORURAL" => "",
+                            "ACIDENTEGEOGRAFICO" => ""
+                        ),
+                        "CONDOMINIO" => array(
+                            "NOME_CONDOMINIO" => "",
+                            "BLOCO" => "",
+                            "CONJUNTO" => "",
+                            "TORRE" => "",
+                            "APTO" => "",
+                            "VAGA" => ""
+                        )
                     )
                 )
             )
-        )
-    );
+        );
 
-    // Converte o array para JSON com indentação
-    $json_data = json_encode($data, JSON_PRETTY_PRINT);
+        // Converte o array para JSON com indentação
+        $json_data = json_encode($data, JSON_PRETTY_PRINT);
 
-    // Nome do arquivo
-    $nome_arquivo = $registro_tipo . "_" . $numero_registro . ".json";
-    
-    // Caminho completo do arquivo
-    $caminho_arquivo = "indicador/" . $nome_arquivo;
+        // Nome do arquivo
+        $nome_arquivo = $registro_tipo . "_" . $numero_registro . ".json";
+        
+        // Caminho completo do arquivo
+        $caminho_arquivo = "indicador/" . $nome_arquivo;
 
-    // Salvar o arquivo no diretório
-    file_put_contents($caminho_arquivo, $json_data);
+        // Salvar o arquivo no diretório
+        file_put_contents($caminho_arquivo, $json_data);
 
-    // Exibe uma mensagem de sucesso
-    echo "Indicador salvo com sucesso";
+        // Exibe uma mensagem de sucesso
+        echo "Indicador salvo com sucesso";
+    } else {
+        // Exibe uma mensagem de erro se não conseguir carregar o CNS
+        echo "Erro ao carregar o CNS";
+    }
 }
-
 ?>
+
 </div>
     
 

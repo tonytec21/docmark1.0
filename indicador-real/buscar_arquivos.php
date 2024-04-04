@@ -27,10 +27,15 @@ if (isset($_GET['dataInicial']) && isset($_GET['dataFinal'])) {
         }
     }
 
+    // Obter o conteúdo do arquivo CNS
+    $cnsArquivo = '../carimbo-digital/cns.json';
+    $cnsConteudo = file_get_contents($cnsArquivo);
+    $cnsArray = json_decode($cnsConteudo, true);
+
     // Criar o array unificado com o cabeçalho a partir de TIPOENVIO
     $jsonUnificado = [
         'INDICADOR_REAL' => [
-            'CNS' => '000000',
+             'CNS' => $cnsArray['cns'],
             'REAL' => array_merge(...$conteudos),
         ],
     ];

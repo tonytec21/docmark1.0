@@ -844,7 +844,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         "UF" => $uf,
                         "CIDADE" => $cidade,
                         "BAIRRO" => $bairro,
-                        "CEP" => $cep,
+                        "CEP" => "$cep",
                         "COMPLEMENTO" => "",
                         "QUADRA" => "",
                         "CONJUNTO" => "",

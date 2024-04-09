@@ -68,9 +68,11 @@ if (isset($_POST['start_date']) && isset($_POST['end_date'])) {
     $savePath = '../pdf-para-tiff/historico-indicador/' . $filename;
     file_put_contents($savePath, $xmlOutput);
 
+    // Definir o cabeçalho Content-Type antes de qualquer saída
     header('Content-type: text/xml');
-    echo $xmlOutput;
+    // Definir o cabeçalho Content-Disposition para fazer o download do arquivo XML
     header('Content-Disposition: attachment; filename="' . $filename . '"');
+    // Enviar o conteúdo XML para o navegador
+    echo $xmlOutput;
 }
-
 ?>

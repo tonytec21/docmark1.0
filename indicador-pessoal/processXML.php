@@ -66,6 +66,7 @@ if (isset($_POST['start_date']) && isset($_POST['end_date'])) {
     $filename = "indicador-" . $currentDate . ".xml";
     
     $savePath = '../pdf-para-tiff/historico-indicador/' . $filename;
+    $savePath = '../pdf-para-tiff/indicador-pessoal/' . $filename;
     file_put_contents($savePath, $xmlOutput);
 
     // Definir o cabeçalho Content-Type antes de qualquer saída

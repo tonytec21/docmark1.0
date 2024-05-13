@@ -316,6 +316,43 @@ if(isset($_FILES['xml_file'])) {
 
 <h3 style="margin: 0px 0;">Lista de Matrículas Faltantes</h3>
             <!-- <h3 style="margin: 0px 0;">Intervalo verificado: <?php echo $minimo . ' - ' . $maximo; ?></h3> -->
+            <button class="btn2 first" id="exportar-excel">Exportar para Excel</button><br>
+                    <script>
+                        // Função para exportar os dados para Excel
+                        function exportarParaExcel() {
+                            // Criar uma tabela HTML temporária para converter para Excel
+                            var table = "<table><thead><tr><th>Matrícula Nº</th></tr></thead><tbody>";
+
+                            // Adicionar cada linha da lista de matrículas faltantes à tabela HTML
+                            <?php foreach ($numerosFaltantes as $numeroFaltante): ?>
+                                table += "<tr><td><?php echo $numeroFaltante; ?></td></tr>";
+                            <?php endforeach; ?>
+
+                            table += "</tbody></table>";
+
+                            // Criar um blob de dados do tipo Excel
+                            var blob = new Blob([table], {
+                                type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+                            });
+
+                            // Criar um URL temporário para o blob
+                            var url = window.URL.createObjectURL(blob);
+
+                            // Criar um link para download do Excel
+                            var a = document.createElement('a');
+                            a.href = url;
+                            a.download = 'matriculas_faltantes.xls'; // Nome do arquivo Excel
+                            document.body.appendChild(a);
+                            a.click();
+                            document.body.removeChild(a);
+
+                            // Limpar o URL do blob
+                            window.URL.revokeObjectURL(url);
+                        }
+
+                        // Adicionar um ouvinte de evento para o botão de exportação
+                        document.getElementById('exportar-excel').addEventListener('click', exportarParaExcel);
+        </script>
 
             <table id="tabela-historico2" class="display">
             <thead>

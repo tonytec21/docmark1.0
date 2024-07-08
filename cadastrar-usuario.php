@@ -35,7 +35,9 @@ if (!isset($_SESSION['usuario'])) {
         <input type="submit" class="third" value="Sair">
     </form>
               <div class="orb-container">
-                      <div class="orb"></div>
+              <div class="inner-header flex">
+          <img src="../img/NOVA_LOGO.png" alt="Logo" class="orb">
+        </div>
               </div>
               <h1>DocMark - Cadastro de Funcionários</h1>
             

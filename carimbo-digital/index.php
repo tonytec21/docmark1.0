@@ -31,8 +31,10 @@ function getDataHoraArquivoZIP($arquivoZIP) {
 <body>
 
     <div class="orb-container">
-            <div class="orb"></div>
+        <div class="inner-header flex">
+          <img src="../img/NOVA_LOGO.png" alt="Logo" class="orb">
         </div>
+    </div>
             <h1>DocMark - Carimbo Digital</h1>
             <?php include_once("../menu.php");?>
         <!-- <nav class="menu">

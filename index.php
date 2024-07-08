@@ -23,9 +23,10 @@ verificar_sessao_ativa();
           <input type="submit" class="third" value="Sair">
       </form>
       <div class="inner-header flex">
-        <div class="orb"></div>
-        <h1>DocMark</h1>
+          <img src="img/NOVA_LOGO.png" alt="Logo" class="orb">
+          <h1>DocMark</h1>
       </div>
+
 
   <?php include_once("menu.php");?><br>
         <div class='main-content-container'>

@@ -29,7 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_FILES['files']['name'])) {
 <body>
 <?php include_once("../menu.php");?>
     <div class="orb-container">
-            <div class="orb"></div>
+    <div class="inner-header flex">
+          <img src="../img/NOVA_LOGO.png" alt="Logo" class="orb">
+        </div>
         </div>
             <h1>DocMark - TIFF para PDF</h1><br><br><br>
     

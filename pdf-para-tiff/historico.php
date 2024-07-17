@@ -5,6 +5,9 @@ verificar_sessao_ativa();
 error_reporting(0);
 ini_set('display_errors', 0);
 
+// Defina o fuso horário para garantir que as datas e horas sejam corretas
+date_default_timezone_set('America/Sao_Paulo');
+
 $pastaHistorico = __DIR__ . '/historico';
 $arquivos = glob($pastaHistorico . '/*');
 
@@ -184,48 +187,48 @@ if(isset($_FILES['xml_file'])) {
             function showSuccessPopup(message) {
                     const successHtml = `
                         <div id="success-modal" style="
-                            position: fixed;
-                            top: 0;
-                            left: 0;
-                            width: 100%;
-                            height: 100%;
-                            background-color: rgba(0, 0, 0, 0.5);
-                            display: flex;
-                            align-items: center;
+                            posição: fixada;
+                            superior: 0;
+                            esquerda: 0;
+                            largura: 100%;
+                            altura: 100%;
+                            fundo-color: rgba(0, 0, 0, 0,5);
+                            exibição: flex;
+                            alinhar-items: centro;
                             justify-content: center;
                             z-index: 9999;
                         ">
                             <div style="
                                 padding: 20px;
-                                background-color: #f1f1f1;
+                                fundo-color: #f1f1f1;
                                 border: 1px solid #ccc;
                                 border-radius: 4px;
                             ">
-                                <p>${message}</p>
+                                <p>${mensagem}</p>
                                 <button id="close-success-btn" style="
-                                    display: block;
-                                    margin: 10px auto;
-                                    padding: 5px 10px;
-                                ">Fechar</button>
+                                    exibição: bloco;
+                                    margem: 10px automática;
+                                    preenchimento: 5px 10px;
+                                ">Fechar</botão>
                             </div>
                         </div>
                     `;
-                    $('body').append(successHtml);
+                    $('corpo').adicionar(successHtml);
 
-                    $('#close-success-btn').on('click', function() {
+                    $('#close-success-btn').ao('clique', function() {
                         hideSuccessPopup();
                     });
                 }
 
                 function hideSuccessPopup() {
-                    $('#success-modal').remove();
+                    $('#success-modal').remover();
                 }
 
-                document.getElementById('visualizar-button').addEventListener('click', function () {
+                documento.getElementById('visualizar-botão').adicionarEventListener('clique', function () {
                     showProcessingPopup(); // Mostrar pop-up de processamento
                     fetch('atualizar-visualizacao.php')
-                        .then(response => response.text())
-                        .then(output => {
+                        .então(resposta => resposta.text())
+                        .então(saída => {
                             hideProcessingPopup(); // Esconder pop-up de processamento
                             showSuccessPopup('Visualização das Matrículas atualizada com sucesso!'); // Mostrar pop-up de sucesso
                         })

@@ -5,6 +5,8 @@ verificar_sessao_ativa();
 error_reporting(0);
 ini_set('display_errors', 0);
 
+date_default_timezone_set('America/Sao_Paulo');
+
 $pastaHistorico = __DIR__ . '/historico';
 $arquivos = glob($pastaHistorico . '/*');
 
@@ -88,7 +90,9 @@ if(isset($_FILES['xml_file'])) {
 <body>
 
     <div class="orb-container">
-            <div class="orb"></div>
+    <div class="inner-header flex">
+          <img src="../img/NOVA_LOGO.png" alt="Logo" class="orb">
+        </div>
     </div>
             <h1>DocMark - Controle de Conversões</h1>
             <?php include_once("../menu.php");?>

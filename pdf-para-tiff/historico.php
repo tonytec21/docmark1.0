@@ -81,6 +81,7 @@ $dataExibicao = date('d/m/Y', $dataModificacao);
     <script src="js/chartjs-plugin-datalabels.js"></script>
     <script type="text/javascript" charset="utf8" src="js/jquery-3.5.1.js"></script>
     <script type="text/javascript" charset="utf8" src="js/jquery.dataTables.js"></script>
+    <link rel="stylesheet" href="../css/dataTables.bootstrap4.min.css">
 
 <style>
     form {

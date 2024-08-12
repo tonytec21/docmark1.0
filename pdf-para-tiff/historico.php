@@ -5,8 +5,6 @@ verificar_sessao_ativa();
 error_reporting(0);
 ini_set('display_errors', 0);
 
-date_default_timezone_set('America/Sao_Paulo');
-
 $pastaHistorico = __DIR__ . '/historico';
 $arquivos = glob($pastaHistorico . '/*');
 
@@ -54,15 +52,6 @@ if(isset($_FILES['xml_file'])) {
         echo '<script>alert("Por favor, selecione um arquivo XML");</script>';
     }
 }
-
-// Obter a data de modificação do arquivo
-$dataModificacao = filemtime($arquivo);
-
-// Formatar a data no formato americano para a ordenação
-$dataOrder = date('Y-m-d', $dataModificacao);
-
-// Formatar a data no formato brasileiro para exibição
-$dataExibicao = date('d/m/Y', $dataModificacao);
 ?>
 
 
@@ -99,9 +88,7 @@ $dataExibicao = date('d/m/Y', $dataModificacao);
 <body>
 
     <div class="orb-container">
-    <div class="inner-header flex">
-          <img src="../img/NOVA_LOGO.png" alt="Logo" class="orb">
-        </div>
+            <div class="orb"></div>
     </div>
             <h1>DocMark - Controle de Conversões</h1>
             <?php include_once("../menu.php");?>
@@ -303,7 +290,7 @@ $dataExibicao = date('d/m/Y', $dataModificacao);
                          ?>
                             <tr>
                                 <td><?php echo str_replace('.tiff', '', basename($arquivo)); ?></td>
-                                <td data-order="<?php echo $dataOrder; ?>"><?php echo $dataExibicao; ?></td>
+                                <td><?php echo date('Y-m-d', filemtime($arquivo)); ?></td>
                                 <td><?php echo strftime('%H:%M:%S', filemtime($arquivo)); ?></td>
                                 <td><a class="btn first" style="text-align: center!important;" href="historico/<?php echo basename($arquivo); ?>" download>Download</a></td>
                                 <td><a class="btn first" href="pdf-viw/<?php echo str_replace('.tiff', '.pdf', basename($arquivo)); ?>" target="_blank">Visualizar</a></td>

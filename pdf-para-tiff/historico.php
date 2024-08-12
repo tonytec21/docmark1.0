@@ -81,11 +81,7 @@ $dataExibicao = date('d/m/Y', $dataModificacao);
     <script src="js/chartjs-plugin-datalabels.js"></script>
     <script type="text/javascript" charset="utf8" src="js/jquery-3.5.1.js"></script>
     <script type="text/javascript" charset="utf8" src="js/jquery.dataTables.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/jquery.mask.min.js"></script>
-    <script src="js/jquery.dataTables.min.js"></script>
-    <script src="js/dataTables.bootstrap4.min.js"></script>
+
 <style>
     form {
         display: flex;
@@ -278,7 +274,7 @@ $dataExibicao = date('d/m/Y', $dataModificacao);
             </div>
             <br>
         </form>
-            <table id="tabelaResultados" class="table table-striped table-bordered" style="zoom: 85%">
+                    <table id="tabela-historico" class="display">
                     <thead>
                         <tr>
                             <th>Matrícula Nº</th>
@@ -330,14 +326,13 @@ $dataExibicao = date('d/m/Y', $dataModificacao);
                             }
                         });
                     });
-      
-               
-                // Inicializar DataTable
-                $('#tabelaResultados').DataTable({
-                    "language": {
-                        "url": "css/Portuguese-Brasil.json"
-                    },
-                    "order": [[0, 'desc']]
+                </script>
+
+                <script>
+                $(document).ready(function() {
+                    $('#tabela-historico').DataTable({
+                        order:[0, 'desc']
+                    });
                 });
                 </script>
 

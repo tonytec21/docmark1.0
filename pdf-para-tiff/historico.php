@@ -274,7 +274,7 @@ $dataExibicao = date('d/m/Y', $dataModificacao);
             </div>
             <br>
         </form>
-                    <table id="tabela-historico" class="display">
+                    <table id="tabela-historico" class="table table-striped table-bordered" class="display">
                     <thead>
                         <tr>
                             <th>Matrícula Nº</th>

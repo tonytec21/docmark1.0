@@ -279,7 +279,7 @@ $dataExibicao = date('d/m/Y', $dataModificacao);
             </div>
             <br>
         </form>
-                    <table id="tabela-historico" class="table table-striped table-bordered" class="display">
+            <table id="tabelaResultados" class="table table-striped table-bordered" style="zoom: 85%">
                     <thead>
                         <tr>
                             <th>Matrícula Nº</th>
@@ -334,7 +334,7 @@ $dataExibicao = date('d/m/Y', $dataModificacao);
       
                
                 // Inicializar DataTable
-                $('#tabela-historico').DataTable({
+                $('#tabelaResultados').DataTable({
                     "language": {
                         "url": "css/Portuguese-Brasil.json"
                     },

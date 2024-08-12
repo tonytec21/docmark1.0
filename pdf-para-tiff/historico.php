@@ -75,7 +75,7 @@ $dataExibicao = date('d/m/Y', $dataModificacao);
     <script src="../js/chart.js"></script>
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/pop-up.js"></script>
-    <!-- <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css"> -->
+    <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
     <script src="js/jquery.min.js"></script>
     <script src="js/chart.js"></script>
     <script src="js/chartjs-plugin-datalabels.js"></script>

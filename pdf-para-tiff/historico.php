@@ -331,13 +331,14 @@ $dataExibicao = date('d/m/Y', $dataModificacao);
                             }
                         });
                     });
-                </script>
-
-                <script>
-                $(document).ready(function() {
-                    $('#tabela-historico').DataTable({
-                        order:[0, 'desc']
-                    });
+      
+               
+                // Inicializar DataTable
+                $('#tabela-historico').DataTable({
+                    "language": {
+                        "url": "css/Portuguese-Brasil.json"
+                    },
+                    "order": [[0, 'desc']]
                 });
                 </script>
 

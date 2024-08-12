@@ -290,7 +290,7 @@ if(isset($_FILES['xml_file'])) {
                          ?>
                             <tr>
                                 <td><?php echo str_replace('.tiff', '', basename($arquivo)); ?></td>
-                                <td><?php echo date('Y-m-d', filemtime($arquivo)); ?></td>
+                                <td data-order="<?php echo date('Y-m-d', filemtime($arquivo)); ?>"><?php echo date('d/m/Y', filemtime($arquivo)); ?></td>
                                 <td><?php echo strftime('%H:%M:%S', filemtime($arquivo)); ?></td>
                                 <td><a class="btn first" style="text-align: center!important;" href="historico/<?php echo basename($arquivo); ?>" download>Download</a></td>
                                 <td><a class="btn first" href="pdf-viw/<?php echo str_replace('.tiff', '.pdf', basename($arquivo)); ?>" target="_blank">Visualizar</a></td>

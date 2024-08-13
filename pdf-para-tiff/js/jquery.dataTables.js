@@ -11645,7 +11645,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfo": "Mostrando _START_ a _END_ de _TOTAL_ erros",
+			"sInfo": "Mostrando _START_ a _END_ de _TOTAL_ matriculas",
 	
 	
 			/**
@@ -11666,7 +11666,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoEmpty": "Mostrando 0 a 0 de 0 erros",
+			"sInfoEmpty": "Mostrando 0 a 0 de 0 matriculas",
 	
 	
 			/**
@@ -11688,7 +11688,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoFiltered": "(filtrado de _MAX_ erros totais)",
+			"sInfoFiltered": "(filtrado de _MAX_ matriculas totais)",
 	
 	
 			/**
@@ -11806,7 +11806,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sLengthMenu": "Mostrar _MENU_ erros",
+			"sLengthMenu": "Mostrar _MENU_ matriculas",
 	
 	
 			/**

@@ -53,7 +53,9 @@ for filename in os.listdir(pdf_dir):
             images_1bit[0].save(tiff_path, save_all=True, append_images=images_1bit[1:], compression="group4")
             
             # Mover o PDF para o diretório de convertidos com o nome normalizado (substituindo se já existir)
-            os.replace(pdf_path, pdf_new_path)  # Substitui o arquivo se já existir
+            import shutil
+            shutil.move(pdf_path, pdf_new_path)  # Move entre unidades diferentes
+
             
             print(f"Arquivo convertido com sucesso: {pdf_path} -> {tiff_path}")
         
